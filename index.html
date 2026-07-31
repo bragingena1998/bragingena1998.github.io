@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Тренажёр собеседований онлайн — бесплатная репетиция с разбором ответов</title>
+<meta name="description" content="Бесплатная репетиция собеседования по вашей вакансии с hh.ru. Девять вопросов и разбор каждого ответа: что сработало, что помешало и как это стоило сказать.">
+<link rel="canonical" href="https://sobez.mindandmotion.ru/">
+
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://sobez.mindandmotion.ru/">
+<meta property="og:title" content="Тренажёр собеседований — бесплатная репетиция с разбором ответов">
+<meta property="og:description" content="Девять вопросов по вашей вакансии и разбор каждого ответа. Показываем не только что не так, но и как это стоило сказать.">
+<meta property="og:locale" content="ru_RU">
+<meta name="twitter:card" content="summary">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Service",
+      "name": "Тренажёр собеседований",
+      "serviceType": "Подготовка к собеседованию",
+      "description": "Тренировочное собеседование по вашей вакансии и резюме: девять вопросов с разбором каждого ответа.",
+      "areaServed": "RU",
+      "availableChannel": {
+        "@type": "ServiceChannel",
+        "serviceUrl": "https://t.me/trainerinterview_bot"
+      },
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "RUB",
+        "description": "Бесплатная пробная сессия"
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Что отвечать, когда на собеседовании спрашивают текущую зарплату?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Называть свою текущую сумму невыгодно: дальше торг пойдёт от неё, а не от бюджета работодателя. Но и уходить в глухую оборону с придуманным основанием вроде коммерческой тайны хуже, чем просто не назвать цифру. На тренажёре этот вопрос отрабатывается отдельно."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Чем это отличается от разговора с ChatGPT?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Разбор идёт по конкретным правилам: структура ответа, конкретика, релевантность, объём, понятность для нетехнического слушателя и то, чем вы закончили ответ. Правила выстроены на реальных прогонах, а не придуманы на ходу. Сейчас каждую сессию смотрит человек."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Сколько это занимает времени?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Около двадцати минут перепиской в Telegram. Девять вопросов задаются по одному, следующий не показывается, пока вы не ответили на текущий."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Это правда бесплатно?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Да. Сейчас идёт проверка продукта на живых людях. Взамен я прошу только честный отзыв — что оказалось полезным, а что пустым."
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
+
+<style>
+  :root {
+    --paper: #EAEDE8;
+    --raised: #F7F8F5;
+    --ink: #14171A;
+    --muted: #566059;
+    --line: #D2D8D1;
+    --glow-a: rgba(168, 96, 12, 0.16);
+    --glow-b: rgba(60, 100, 90, 0.10);
+    --accent: #A05A0B;
+    --accent-soft: rgba(160, 90, 11, 0.10);
+    --on-accent: #FDF8F0;
+    --band: #1B2226;
+    --band-ink: #EDEFEA;
+    --shadow: 0 1px 2px rgba(20, 23, 26, 0.05), 0 10px 28px rgba(20, 23, 26, 0.07);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --paper: #0E1114;
+      --raised: #191D21;
+      --ink: #E8EBE7;
+      --muted: #99A39D;
+      --line: #272D31;
+      --glow-a: rgba(224, 160, 60, 0.20);
+      --glow-b: rgba(80, 150, 130, 0.12);
+      --accent: #E0A03C;
+      --accent-soft: rgba(224, 160, 60, 0.12);
+      --on-accent: #14110A;
+      --band: #1D2429;
+      --band-ink: #EDEFEA;
+      --shadow: 0 1px 2px rgba(0, 0, 0, 0.35), 0 12px 32px rgba(0, 0, 0, 0.32);
+    }
+  }
+  :root[data-theme="light"] {
+    --paper: #EAEDE8; --raised: #F7F8F5; --ink: #14171A; --muted: #566059;
+    --line: #D2D8D1; --glow-a: rgba(168, 96, 12, 0.16); --glow-b: rgba(60, 100, 90, 0.10);
+    --accent: #A05A0B; --accent-soft: rgba(160, 90, 11, 0.10); --on-accent: #FDF8F0;
+    --band: #1B2226;
+    --shadow: 0 1px 2px rgba(20, 23, 26, 0.05), 0 10px 28px rgba(20, 23, 26, 0.07);
+  }
+  :root[data-theme="dark"] {
+    --paper: #0E1114; --raised: #191D21; --ink: #E8EBE7; --muted: #99A39D;
+    --line: #272D31; --glow-a: rgba(224, 160, 60, 0.20); --glow-b: rgba(80, 150, 130, 0.12);
+    --accent: #E0A03C; --accent-soft: rgba(224, 160, 60, 0.12); --on-accent: #14110A;
+    --band: #1D2429;
+    --shadow: 0 1px 2px rgba(0, 0, 0, 0.35), 0 12px 32px rgba(0, 0, 0, 0.32);
+  }
+
+  * { box-sizing: border-box; }
+  html { text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    color: var(--ink);
+    background-color: var(--paper);
+    background-image:
+      radial-gradient(760px 420px at 18% -40px, var(--glow-a), transparent 68%),
+      radial-gradient(700px 460px at 88% 210px, var(--glow-b), transparent 66%);
+    background-repeat: no-repeat;
+    background-attachment: scroll;
+    font-family: -apple-system, "Segoe UI", Roboto, system-ui, sans-serif;
+    font-size: 16px;
+    line-height: 1.62;
+    -webkit-font-smoothing: antialiased;
+  }
+  .mono {
+    font-family: ui-monospace, "SF Mono", "Cascadia Code", "Roboto Mono", Consolas, monospace;
+  }
+  .wrap { max-width: 680px; margin: 0 auto; padding: 0 22px; }
+
+  /* Выключка по формату: ровный край справа + переносы, чтобы не было дыр */
+  p, .steps .t, .faq-a {
+    text-align: justify;
+    text-justify: inter-word;
+    hyphens: auto;
+    -webkit-hyphens: auto;
+  }
+  .cta-note, .final p, footer, .demo-label, .eyebrow { text-align: center; hyphens: manual; }
+  .final p { text-align: center; }
+
+  /* --- Шапка --------------------------------------------------------- */
+  .hero { padding: 54px 0 46px; }
+  .eyebrow {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-size: 11.5px; letter-spacing: 0.11em; text-transform: uppercase;
+    color: var(--accent); margin-bottom: 20px;
+  }
+  .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); }
+  h1 {
+    font-family: Georgia, "Iowan Old Style", "Times New Roman", ui-serif, serif;
+    font-weight: 400; font-size: 33px; line-height: 1.22;
+    letter-spacing: -0.015em; text-wrap: balance; margin: 0 0 18px;
+    text-align: left; hyphens: manual;
+  }
+  .lede { font-size: 17.5px; color: var(--muted); margin: 0 0 26px; }
+  .slogan {
+    font-family: Georgia, "Iowan Old Style", "Times New Roman", ui-serif, serif;
+    font-style: italic; font-size: 17px; color: var(--ink);
+    padding-left: 16px; border-left: 2px solid var(--accent);
+    margin: 0 0 32px; text-align: left; hyphens: manual;
+  }
+
+  /* --- Кнопка -------------------------------------------------------- */
+  .cta-box { text-align: center; }
+  .cta {
+    display: block; width: 100%; max-width: 340px; margin: 0 auto;
+    text-align: center;
+    background: var(--accent); color: var(--on-accent);
+    text-decoration: none; font-size: 16.5px; font-weight: 600;
+    padding: 16px 22px; border-radius: 4px; min-height: 50px;
+    box-shadow: var(--shadow);
+    transition: transform 0.12s ease, filter 0.12s ease;
+  }
+  .cta:hover { filter: brightness(1.07); }
+  .cta:active { transform: translateY(1px); }
+  .cta:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
+  .cta-note { font-size: 13.5px; color: var(--muted); margin: 13px 0 0; }
+
+  /* --- Демонстрация разбора ------------------------------------------- */
+  .demo {
+    margin-top: 42px; background: var(--raised);
+    border: 1px solid var(--line); border-radius: 10px; overflow: hidden;
+    box-shadow: var(--shadow);
+  }
+  .demo-head {
+    font-size: 11.5px; letter-spacing: 0.09em; text-transform: uppercase;
+    color: var(--muted); padding: 14px 22px; border-bottom: 1px solid var(--line);
+    text-align: center;
+  }
+  .demo-row { padding: 19px 22px; }
+  .demo-row + .demo-row { border-top: 1px solid var(--line); }
+  .demo-row.after { background: var(--accent-soft); }
+  .demo-label {
+    font-size: 11px; letter-spacing: 0.09em; text-transform: uppercase;
+    color: var(--muted); display: block; margin-bottom: 7px; text-align: left;
+  }
+  .demo-row.after .demo-label { color: var(--accent); }
+  .demo-text { font-size: 16px; margin: 0; }
+  .demo-text.weak { color: var(--muted); }
+  .demo-text b { font-weight: 600; }
+
+  /* --- Тихая полоса --------------------------------------------------- */
+  .band-quiet {
+    background: var(--raised);
+    border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);
+    padding: 48px 0;
+  }
+  .band-quiet .big {
+    font-family: Georgia, "Iowan Old Style", "Times New Roman", ui-serif, serif;
+    font-size: 23px; line-height: 1.4; margin: 0 0 14px; text-wrap: balance;
+    text-align: left; hyphens: manual;
+  }
+  .band-quiet p { color: var(--muted); margin: 0; }
+
+  /* --- Обычные блоки -------------------------------------------------- */
+  .block { padding: 48px 0; }
+  h2 {
+    font-family: Georgia, "Iowan Old Style", "Times New Roman", ui-serif, serif;
+    font-weight: 400; font-size: 25px; letter-spacing: -0.01em; margin: 0 0 22px;
+    text-align: left; hyphens: manual;
+  }
+  .block p { margin: 0 0 12px; }
+  .block p:last-child { margin-bottom: 0; }
+
+  /* --- Шаги ---------------------------------------------------------- */
+  .steps { list-style: none; margin: 0; padding: 0; position: relative; }
+  .steps::before {
+    content: ""; position: absolute; left: 13px; top: 12px; bottom: 12px;
+    width: 1px; background: var(--line);
+  }
+  .steps li {
+    position: relative; display: grid; grid-template-columns: 40px 1fr;
+    gap: 14px; padding-bottom: 22px;
+  }
+  .steps li:last-child { padding-bottom: 0; }
+  .steps .n {
+    position: relative; z-index: 1;
+    width: 27px; height: 27px; border-radius: 50%;
+    background: var(--paper); border: 1px solid var(--accent); color: var(--accent);
+    display: grid; place-items: center; font-size: 12px; font-weight: 600;
+  }
+  .steps .t { padding-top: 2px; }
+
+  /* --- Карточка автора ------------------------------------------------ */
+  .note {
+    background: var(--raised); border: 1px solid var(--line);
+    border-left: 3px solid var(--accent); border-radius: 0 10px 10px 0;
+    padding: 22px 24px; box-shadow: var(--shadow);
+  }
+  .note p { margin: 0 0 11px; }
+  .note p:last-child { margin: 0; }
+
+  /* --- Ссылка на статью ------------------------------------------------ */
+  .readmore {
+    display: flex; align-items: center; gap: 14px;
+    margin-top: 16px; padding: 16px 18px;
+    background: var(--raised); border: 1px solid var(--line);
+    border-radius: 10px; text-decoration: none;
+    transition: border-color 0.15s ease, transform 0.12s ease;
+  }
+  .readmore:hover { border-color: var(--accent); }
+  .readmore:active { transform: translateY(1px); }
+  .readmore:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .readmore-body { flex: 1; min-width: 0; }
+  .readmore-label {
+    display: block; font-size: 11px; letter-spacing: 0.09em;
+    text-transform: uppercase; color: var(--accent); margin-bottom: 4px;
+  }
+  .readmore-title {
+    display: block; font-size: 15.5px; color: var(--ink); line-height: 1.4;
+  }
+  .readmore-arrow { color: var(--accent); font-size: 20px; flex-shrink: 0; }
+
+  /* --- Вопросы и ответы ------------------------------------------------ */
+  .faq { display: flex; flex-direction: column; gap: 2px; }
+  .faq details {
+    background: var(--raised); border: 1px solid var(--line);
+    border-radius: 8px; padding: 0;
+  }
+  .faq summary {
+    cursor: pointer; list-style: none; padding: 15px 20px;
+    font-weight: 600; font-size: 16px;
+    display: flex; justify-content: space-between; align-items: center; gap: 12px;
+  }
+  .faq summary::-webkit-details-marker { display: none; }
+  .faq summary::after {
+    content: "+"; color: var(--accent); font-size: 20px; line-height: 1; flex-shrink: 0;
+  }
+  .faq details[open] summary::after { content: "−"; }
+  .faq summary:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
+  .faq-a { padding: 0 20px 17px; margin: 0; color: var(--muted); font-size: 15.5px; }
+
+  /* --- Финальная плашка ----------------------------------------------- */
+  .final {
+    background: var(--band); color: var(--band-ink);
+    border-radius: 12px; padding: 40px 26px; margin: 8px 0 52px;
+    text-align: center; box-shadow: var(--shadow);
+  }
+  .final h2 { color: var(--band-ink); margin-bottom: 12px; text-align: center; }
+  .final p { color: rgba(237, 239, 234, 0.74); margin: 0 auto 24px; max-width: 42ch; }
+
+  footer {
+    color: var(--muted); font-size: 13px;
+    border-top: 1px solid var(--line); padding: 22px 0 44px;
+  }
+  a { color: inherit; }
+
+  @media (min-width: 680px) {
+    h1 { font-size: 42px; }
+    .lede { font-size: 18.5px; }
+    .hero { padding: 78px 0 56px; }
+    .band-quiet .big { font-size: 26px; }
+    .final { padding: 50px 44px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    * { transition: none !important; }
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <header class="hero">
+    <span class="eyebrow mono"><span class="dot"></span>Бесплатно · Telegram</span>
+    <h1>Девять вопросов по вашей вакансии. Разбор каждого ответа.</h1>
+    <p class="lede">Не общие советы из статей про собеседования, а работа с тем, что вы ответили на самом деле.</p>
+    <p class="slogan">Растеряться здесь, чтобы не растеряться там.</p>
+
+    <div class="cta-box">
+      <a class="cta" href="https://t.me/trainerinterview_bot?start=site" onclick="ym(111188131,'reachGoal','start_click')">Начать бесплатную сессию</a>
+      <p class="cta-note">Около 20 минут перепиской. Платить ничего не нужно.</p>
+    </div>
+
+    <div class="demo">
+      <div class="demo-head mono">Как выглядит разбор</div>
+      <div class="demo-row">
+        <span class="demo-label mono">Вы ответили</span>
+        <p class="demo-text weak">Занимались этим долго, работали небольшой группой. В целом справились.</p>
+      </div>
+      <div class="demo-row after">
+        <span class="demo-label mono">Стоило сказать</span>
+        <p class="demo-text">Работа заняла <b>месяц</b>. Нас было <b>трое</b>, суммарно около <b>двухсот часов</b>. Отказы после внедрения снизились.</p>
+      </div>
+    </div>
+  </header>
+</div>
+
+<div class="band-quiet">
+  <div class="wrap">
+    <p class="big">Тренироваться перед собеседованием обычно не на ком.</p>
+    <p>Друг задаст не те вопросы. Зеркало не перебивает и не спорит. А проверить себя на живом рекрутёре можно один раз — вторая попытка в той же компании не выпадет. Поэтому первое настоящее собеседование часто уходит на то, чтобы понять, как вообще отвечать.</p>
+  </div>
+</div>
+
+<div class="wrap">
+  <section class="block">
+    <h2>Как проходит репетиция собеседования</h2>
+    <ol class="steps">
+      <li><span class="n mono">1</span><span class="t">Присылаете текст вакансии, на которую откликаетесь — например, с hh.ru или Авито</span></li>
+      <li><span class="n mono">2</span><span class="t">Присылаете резюме — файлом или текстом</span></li>
+      <li><span class="n mono">3</span><span class="t">Получаете сверку резюме с вакансией: что в нём не сказано, а стоило бы</span></li>
+      <li><span class="n mono">4</span><span class="t">Отвечаете на девять вопросов по одному. После каждого — что сработало, что помешало и как это стоило сказать</span></li>
+    </ol>
+  </section>
+
+  <section class="block">
+    <h2>Что именно разбираем</h2>
+    <p>Тренажёр не проверяет ваши профессиональные знания — на первом этапе отбора их почти нигде и не проверяют. Отсеивают за другое: расплывчатые формулировки, отсутствие конкретики, ответ не на тот вопрос, который задали, и неумение объяснить свою работу человеку без профильного образования.</p>
+    <p>Отдельно разбирается денежный блок: сколько называть, что отвечать на вопрос о текущей зарплате и как вести себя, когда предложили меньше ожидаемого.</p>
+  </section>
+
+  <section class="block">
+    <h2>Кто это делает</h2>
+    <div class="note">
+      <p>Сессии сейчас веду лично — проверяю продукт на живых людях, прежде чем что-то автоматизировать. Разбор смотрит человек, поэтому ответ приходит не мгновенно.</p>
+      <p>Я инженер, не эйчар и не карьерный коуч. Правила разбора выстроил на трёх прогонах на себе — с реальными ошибками и правками между заходами.</p>
+    </div>
+
+    <a class="readmore" href="https://vc.ru/hr/3053131-kak-pravilno-vedti-peregovory-o-zarplate-na-sobesedovanii" target="_blank" rel="noopener" onclick="ym(111188131,'reachGoal','article_click')">
+      <span class="readmore-body">
+        <span class="readmore-label mono">Как это было у меня</span>
+        <span class="readmore-title">Мне предложили меньше, чем я просил. Я гордо ушёл — и это была ошибка. Статья на vc.ru</span>
+      </span>
+      <span class="readmore-arrow" aria-hidden="true">→</span>
+    </a>
+  </section>
+
+  <section class="block">
+    <h2>Частые вопросы</h2>
+    <div class="faq">
+      <details>
+        <summary>Что отвечать, когда спрашивают текущую зарплату?</summary>
+        <p class="faq-a">Называть свою сумму невыгодно: дальше торг пойдёт от неё, а не от бюджета работодателя. Но и глухая оборона с придуманным основанием вроде коммерческой тайны хуже, чем просто не назвать цифру — опытный рекрутёр это парирует. На тренажёре этот вопрос отрабатывается отдельно, вместе с ситуацией, когда вам предложили меньше ожидаемого.</p>
+      </details>
+      <details>
+        <summary>Чем это отличается от разговора с ChatGPT?</summary>
+        <p class="faq-a">Разбор идёт по конкретным правилам: структура ответа, конкретика, релевантность, объём, понятность для нетехнического слушателя и то, чем вы закончили ответ. Правила выстроены на реальных прогонах и правились после каждого. Плюс сейчас каждую сессию смотрит человек, а не только программа.</p>
+      </details>
+      <details>
+        <summary>Сколько это занимает времени?</summary>
+        <p class="faq-a">Около двадцати минут перепиской в Telegram. Вопросы задаются по одному: следующий не появится, пока вы не ответили на текущий — как на настоящем собеседовании.</p>
+      </details>
+      <details>
+        <summary>Это правда бесплатно?</summary>
+        <p class="faq-a">Да. Сейчас идёт проверка продукта на живых людях, и мест немного. Взамен я прошу только честный отзыв — что оказалось полезным, а что пустым.</p>
+      </details>
+      <details>
+        <summary>Подойдёт ли это моей профессии?</summary>
+        <p class="faq-a">Любая вакансия, любая отрасль. Проверено пока на одном человеке в одной отрасли — если попробуете, узнаем вместе, работает ли шире. Именно поэтому сейчас бесплатно.</p>
+      </details>
+    </div>
+  </section>
+
+  <div class="final">
+    <h2>Попробуем?</h2>
+    <p>Сессия бесплатная. Взамен прошу только честный отзыв — что оказалось полезным, а что пустым.</p>
+    <div class="cta-box">
+      <a class="cta" href="https://t.me/trainerinterview_bot?start=site" onclick="ym(111188131,'reachGoal','start_click')">Начать бесплатную сессию</a>
+    </div>
+  </div>
+
+  <footer class="mono">Тренажёр собеседований · <a href="https://t.me/trainerinterview_bot?start=footer">@trainerinterview_bot</a></footer>
+</div>
+
+<!-- Яндекс.Метрика: вместо 111188131 подставить номер своего счётчика -->
+<script type="text/javascript">
+(function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+m[i].l=1*new Date();
+for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+(window, document,'script','https://mc.yandex.ru/metrika/tag.js', 'ym');
+
+ym(111188131, 'init', {
+  ssr: true,
+  clickmap: true,
+  trackLinks: true,
+  accurateTrackBounce: true,
+  webvisor: true
+});
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/111188131" style="position:absolute; left:-9999px;" alt=""></div></noscript>
+
+</body>
+</html>

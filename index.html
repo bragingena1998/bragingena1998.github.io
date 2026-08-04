@@ -197,17 +197,72 @@
 
   /* --- Запасные способы попасть в бота -------------------------------- */
   [hidden] { display: none !important; }
-  .fallback {
-    max-width: 420px; margin: 18px auto 0; text-align: left;
-    background: var(--raised); border: 1px solid var(--line);
-    border-left: 3px solid var(--accent); border-radius: 0 8px 8px 0;
-    padding: 18px 20px; box-shadow: var(--shadow); font-size: 14.5px;
+  .modal {
+    position: fixed; inset: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: center;
+    padding: 20px;
   }
-  .fallback p { margin: 0 0 11px; text-align: left; hyphens: manual; }
-  .fallback ol { margin: 0; padding-left: 20px; }
-  .fallback li { margin-bottom: 10px; text-align: left; hyphens: manual; }
-  .fallback li:last-child { margin-bottom: 0; }
-  .fallback a { color: var(--accent); }
+  .modal-back {
+    position: absolute; inset: 0;
+    background: rgba(8, 10, 12, 0.62);
+    -webkit-backdrop-filter: blur(3px); backdrop-filter: blur(3px);
+  }
+  .modal-card {
+    position: relative; width: 100%; max-width: 460px;
+    max-height: calc(100vh - 40px); overflow-y: auto;
+    background: var(--raised); color: var(--ink);
+    border: 1px solid var(--line); border-top: 3px solid var(--accent);
+    border-radius: 12px; padding: 30px 26px 26px;
+    box-shadow: 0 24px 70px rgba(0, 0, 0, 0.4);
+    animation: rise 0.18s ease-out;
+  }
+  @keyframes rise { from { opacity: 0; transform: translateY(10px); } }
+  .modal-x {
+    position: absolute; top: 10px; right: 12px;
+    background: none; border: 0; cursor: pointer;
+    color: var(--muted); font-size: 26px; line-height: 1;
+    padding: 4px 8px; border-radius: 4px;
+  }
+  .modal-x:hover { color: var(--ink); }
+  .modal-x:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+  .modal-title {
+    font-family: Georgia, "Iowan Old Style", "Times New Roman", ui-serif, serif;
+    font-weight: 400; font-size: 24px; line-height: 1.25;
+    margin: 0 0 12px; padding-right: 28px; text-align: left; hyphens: manual;
+  }
+  .modal-lede {
+    font-size: 15px; color: var(--muted); margin: 0 0 22px;
+    text-align: left; hyphens: manual;
+  }
+  .modal-steps { margin: 0; padding-left: 22px; font-size: 15px; }
+  .modal-steps li {
+    margin-bottom: 20px; text-align: left; hyphens: manual;
+    padding-left: 2px;
+  }
+  .modal-steps li:last-child { margin-bottom: 0; }
+  .modal-steps li::marker { color: var(--accent); font-weight: 600; }
+  .modal-retry {
+    display: block; margin-top: 10px; font: inherit; font-size: 14.5px;
+    font-weight: 600; cursor: pointer;
+    background: var(--accent); color: var(--on-accent);
+    border: 0; border-radius: 4px; padding: 10px 16px;
+  }
+  .modal-retry:hover { filter: brightness(1.07); }
+  .modal-copyline { display: block; margin-top: 9px; }
+  .modal-vk {
+    display: table; margin-top: 10px; color: var(--accent);
+    font-weight: 600; text-decoration: none;
+    border-bottom: 1px solid var(--accent);
+  }
+  .modal-retry:focus-visible, .modal-vk:focus-visible {
+    outline: 2px solid var(--ink); outline-offset: 2px;
+  }
+  body.locked { overflow: hidden; }
+  @media (max-width: 420px) {
+    .modal { padding: 12px; }
+    .modal-card { padding: 26px 20px 22px; }
+    .modal-title { font-size: 22px; }
+  }
   .botname {
     display: inline-block; background: var(--accent-soft); color: var(--ink);
     padding: 2px 7px; border-radius: 4px; font-size: 13.5px; white-space: nowrap;
@@ -358,6 +413,7 @@
   }
   @media (prefers-reduced-motion: reduce) {
     * { transition: none !important; }
+    .modal-card { animation: none; }
   }
 </style>
 </head>
@@ -374,14 +430,6 @@
       <a class="cta" href="https://t.me/trainerinterview_bot?start=site" data-source="site">Начать бесплатную сессию</a>
       <p class="cta-note">Около 20 минут перепиской. Платить ничего не нужно.</p>
       <p class="cta-note">Telegram в России ограничивают — нужен VPN или прокси.<span class="vk-box"> Без него просто <a data-vk href="#">напишите мне во ВКонтакте</a>.</span></p>
-      <div class="fallback" hidden>
-        <p><b>Не открылось?</b> Так и бывает: Telegram в России ограничивают.</p>
-        <ol>
-          <li>Включите VPN или прокси и нажмите кнопку ещё раз.</li>
-          <li>Или откройте Telegram и найдите бота по имени: <span class="botname mono">@trainerinterview_bot</span> <button type="button" class="copy">скопировать</button></li>
-          <li class="vk-box">Или напишите мне во ВКонтакте — там ограничений нет: <a data-vk href="#">открыть переписку</a></li>
-        </ol>
-      </div>
     </div>
 
     <div class="demo">
@@ -474,18 +522,36 @@
     <div class="cta-box">
       <a class="cta" href="https://t.me/trainerinterview_bot?start=site" data-source="site">Начать бесплатную сессию</a>
       <p class="cta-note">Telegram в России ограничивают — нужен VPN или прокси.<span class="vk-box"> Без него просто <a data-vk href="#">напишите мне во ВКонтакте</a>.</span></p>
-      <div class="fallback" hidden>
-        <p><b>Не открылось?</b> Так и бывает: Telegram в России ограничивают.</p>
-        <ol>
-          <li>Включите VPN или прокси и нажмите кнопку ещё раз.</li>
-          <li>Или откройте Telegram и найдите бота по имени: <span class="botname mono">@trainerinterview_bot</span> <button type="button" class="copy">скопировать</button></li>
-          <li class="vk-box">Или напишите мне во ВКонтакте — там ограничений нет: <a data-vk href="#">открыть переписку</a></li>
-        </ol>
-      </div>
     </div>
   </div>
 
   <footer class="mono">Тренажёр собеседований · <a href="https://t.me/trainerinterview_bot?start=footer">@trainerinterview_bot</a><span class="vk-box"> · <a data-vk href="#">ВКонтакте</a></span></footer>
+</div>
+
+<!-- Окно с запасными способами. Показывается, только если приложение Telegram
+     не открылось после нажатия кнопки. Одно на всю страницу — обе кнопки
+     открывают его. -->
+<div class="modal" id="helper" hidden role="dialog" aria-modal="true" aria-labelledby="helper-title">
+  <div class="modal-back" data-close></div>
+  <div class="modal-card">
+    <button type="button" class="modal-x" data-close aria-label="Закрыть">×</button>
+    <h2 class="modal-title" id="helper-title">Telegram не открылся</h2>
+    <p class="modal-lede">Так и бывает: в России его ограничивают. Есть три способа попасть на сессию — любой из них рабочий.</p>
+    <ol class="modal-steps">
+      <li>
+        <b>Включите VPN или прокси</b> и попробуйте снова.
+        <button type="button" class="modal-retry" data-retry>Попробовать ещё раз</button>
+      </li>
+      <li>
+        <b>Или найдите бота вручную.</b> Откройте Telegram и вставьте в поиск имя:
+        <span class="modal-copyline"><span class="botname mono">@trainerinterview_bot</span> <button type="button" class="copy">скопировать</button></span>
+      </li>
+      <li class="vk-box">
+        <b>Или напишите мне во ВКонтакте</b> — там ограничений нет, сессию проведём прямо в переписке.
+        <a class="modal-vk" data-vk href="#">Написать во ВКонтакте</a>
+      </li>
+    </ol>
+  </div>
 </div>
 
 <!-- Яндекс.Метрика.
@@ -513,8 +579,9 @@
      а операционная система, в интернет по заблокированному адресу никто не
      стучится.
      Если приложение не открылось (не установлено или Telegram недоступен без
-     VPN) — через полторы секунды под кнопкой раскрывается блок с запасными
+     VPN) — через полторы секунды поверх страницы открывается окно с запасными
      способами: VPN, имя бота для ручного поиска, переписка во ВКонтакте.
+     Именно окно, а не врезка под кнопкой: врезку легко пролистать мимо.
 
      ЧТОБЫ ПОМЕНЯТЬ АДРЕС ВК — правьте одну строку VK ниже.
      Пока в ней осталось слово ЗАМЕНИТЕ, все ссылки на ВК скрыты: лучше без
@@ -545,38 +612,68 @@
     }
   });
 
+  // --- Окно с запасными способами ---
+  var modal = document.getElementById('helper');
+
+  function openModal() {
+    if (!modal.hidden) return;
+    modal.hidden = false;
+    document.body.classList.add('locked');
+    goal('fallback_shown');
+    var x = modal.querySelector('.modal-x');
+    if (x) x.focus();
+  }
+  function closeModal() {
+    modal.hidden = true;
+    document.body.classList.remove('locked');
+  }
+  each('[data-close]', function (el) {
+    el.addEventListener('click', closeModal);
+  });
+  document.addEventListener('keydown', function (e) {
+    if (!modal.hidden && (e.key === 'Escape' || e.key === 'Esc')) closeModal();
+  });
+
+  // --- Попытка открыть приложение ---
+  function tryOpen(source) {
+    var startedAt = Date.now();
+    var leftPage = false;
+    function mark() { leftPage = true; }
+
+    // Приложение открылось — страница уходит в фон, и это единственный
+    // надёжный признак успеха.
+    document.addEventListener('visibilitychange', mark);
+    window.addEventListener('pagehide', mark);
+
+    window.location.href = 'tg://resolve?domain=' + BOT + '&start=' + source;
+
+    setTimeout(function () {
+      document.removeEventListener('visibilitychange', mark);
+      window.removeEventListener('pagehide', mark);
+      // Долгая пауза в таймере тоже означает, что нас сворачивали.
+      if (leftPage || document.hidden || Date.now() - startedAt > 2600) return;
+      openModal();
+    }, 1500);
+  }
+
+  var lastSource = 'site';
+
   // --- Кнопка «Начать бесплатную сессию» ---
   each('.cta', function (btn) {
     btn.addEventListener('click', function (e) {
       e.preventDefault();
       goal('start_click');
+      lastSource = btn.getAttribute('data-source') || 'site';
+      tryOpen(lastSource);
+    });
+  });
 
-      var source = btn.getAttribute('data-source') || 'site';
-      var box = btn.parentNode.querySelector('.fallback');
-      var startedAt = Date.now();
-      var leftPage = false;
-      function mark() { leftPage = true; }
-
-      // Приложение открылось — страница уходит в фон, и это единственный
-      // надёжный признак успеха.
-      document.addEventListener('visibilitychange', mark);
-      window.addEventListener('pagehide', mark);
-
-      window.location.href = 'tg://resolve?domain=' + BOT + '&start=' + source;
-
-      setTimeout(function () {
-        document.removeEventListener('visibilitychange', mark);
-        window.removeEventListener('pagehide', mark);
-        // Долгая пауза в таймере тоже означает, что нас сворачивали.
-        if (leftPage || document.hidden || Date.now() - startedAt > 2600) return;
-        if (box && box.hidden) {
-          box.hidden = false;
-          goal('fallback_shown');
-          if (box.scrollIntoView) {
-            box.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
-          }
-        }
-      }, 1500);
+  // --- «Попробовать ещё раз» внутри окна ---
+  each('[data-retry]', function (btn) {
+    btn.addEventListener('click', function () {
+      goal('retry_click');
+      closeModal();
+      tryOpen(lastSource);
     });
   });
 

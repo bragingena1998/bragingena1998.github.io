@@ -78,20 +78,23 @@
 </script>
 
 <style>
+  /* Светлая тема. Фон намеренно приглушён, а карточки оставлены светлыми:
+     раньше и фон, и карточки были почти белыми — глаза уставали, а объём
+     пропадал, потому что подниматься было не от чего. */
   :root {
-    --paper: #EAEDE8;
-    --raised: #F7F8F5;
-    --ink: #14171A;
-    --muted: #566059;
-    --line: #D2D8D1;
-    --glow-a: rgba(168, 96, 12, 0.16);
-    --glow-b: rgba(60, 100, 90, 0.10);
-    --accent: #A05A0B;
-    --accent-soft: rgba(160, 90, 11, 0.10);
+    --paper: #E3E6DF;
+    --raised: #F4F6F0;
+    --ink: #1A1E21;
+    --muted: #55605A;
+    --line: #CBD3C9;
+    --glow-a: rgba(168, 96, 12, 0.17);
+    --glow-b: rgba(60, 100, 90, 0.11);
+    --accent: #96540A;
+    --accent-soft: rgba(150, 84, 10, 0.11);
     --on-accent: #FDF8F0;
     --band: #1B2226;
     --band-ink: #EDEFEA;
-    --shadow: 0 1px 2px rgba(20, 23, 26, 0.05), 0 10px 28px rgba(20, 23, 26, 0.07);
+    --shadow: 0 1px 2px rgba(20, 23, 26, 0.07), 0 14px 34px rgba(20, 23, 26, 0.13);
   }
   @media (prefers-color-scheme: dark) {
     :root {
@@ -111,11 +114,11 @@
     }
   }
   :root[data-theme="light"] {
-    --paper: #EAEDE8; --raised: #F7F8F5; --ink: #14171A; --muted: #566059;
-    --line: #D2D8D1; --glow-a: rgba(168, 96, 12, 0.16); --glow-b: rgba(60, 100, 90, 0.10);
-    --accent: #A05A0B; --accent-soft: rgba(160, 90, 11, 0.10); --on-accent: #FDF8F0;
+    --paper: #E3E6DF; --raised: #F4F6F0; --ink: #1A1E21; --muted: #55605A;
+    --line: #CBD3C9; --glow-a: rgba(168, 96, 12, 0.17); --glow-b: rgba(60, 100, 90, 0.11);
+    --accent: #96540A; --accent-soft: rgba(150, 84, 10, 0.11); --on-accent: #FDF8F0;
     --band: #1B2226;
-    --shadow: 0 1px 2px rgba(20, 23, 26, 0.05), 0 10px 28px rgba(20, 23, 26, 0.07);
+    --shadow: 0 1px 2px rgba(20, 23, 26, 0.07), 0 14px 34px rgba(20, 23, 26, 0.13);
   }
   :root[data-theme="dark"] {
     --paper: #0E1114; --raised: #191D21; --ink: #E8EBE7; --muted: #99A39D;
@@ -397,6 +400,10 @@
   }
   .final h2 { color: var(--band-ink); margin-bottom: 12px; text-align: center; }
   .final p { color: rgba(237, 239, 234, 0.74); margin: 0 auto 24px; max-width: 42ch; }
+  /* Плашка тёмная в обеих темах, поэтому приписке нужен свой цвет:
+     обычный приглушённый на ней не читается. */
+  .final .cta-note { color: rgba(237, 239, 234, 0.66); margin-bottom: 0; }
+  .final .cta-note a { color: #E2A44A; }
 
   footer {
     color: var(--muted); font-size: 13px;

@@ -193,6 +193,32 @@
   .cta:active { transform: translateY(1px); }
   .cta:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
   .cta-note { font-size: 13.5px; color: var(--muted); margin: 13px 0 0; }
+  .cta-note a { color: var(--accent); }
+
+  /* --- Запасные способы попасть в бота -------------------------------- */
+  [hidden] { display: none !important; }
+  .fallback {
+    max-width: 420px; margin: 18px auto 0; text-align: left;
+    background: var(--raised); border: 1px solid var(--line);
+    border-left: 3px solid var(--accent); border-radius: 0 8px 8px 0;
+    padding: 18px 20px; box-shadow: var(--shadow); font-size: 14.5px;
+  }
+  .fallback p { margin: 0 0 11px; text-align: left; hyphens: manual; }
+  .fallback ol { margin: 0; padding-left: 20px; }
+  .fallback li { margin-bottom: 10px; text-align: left; hyphens: manual; }
+  .fallback li:last-child { margin-bottom: 0; }
+  .fallback a { color: var(--accent); }
+  .botname {
+    display: inline-block; background: var(--accent-soft); color: var(--ink);
+    padding: 2px 7px; border-radius: 4px; font-size: 13.5px; white-space: nowrap;
+  }
+  .copy {
+    font: inherit; font-size: 12.5px; cursor: pointer;
+    background: none; border: 1px solid var(--line); color: var(--muted);
+    padding: 3px 9px; border-radius: 4px; margin-left: 4px;
+  }
+  .copy:hover { border-color: var(--accent); color: var(--accent); }
+  .copy:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
 
   /* --- Демонстрация разбора ------------------------------------------- */
   .demo {
@@ -345,8 +371,17 @@
     <p class="slogan">Растеряться здесь, чтобы не растеряться там.</p>
 
     <div class="cta-box">
-      <a class="cta" href="https://t.me/trainerinterview_bot?start=site" onclick="ym(111188131,'reachGoal','start_click')">Начать бесплатную сессию</a>
+      <a class="cta" href="https://t.me/trainerinterview_bot?start=site" data-source="site">Начать бесплатную сессию</a>
       <p class="cta-note">Около 20 минут перепиской. Платить ничего не нужно.</p>
+      <p class="cta-note">Telegram в России ограничивают — нужен VPN или прокси.<span class="vk-box"> Без него просто <a data-vk href="#">напишите мне во ВКонтакте</a>.</span></p>
+      <div class="fallback" hidden>
+        <p><b>Не открылось?</b> Так и бывает: Telegram в России ограничивают.</p>
+        <ol>
+          <li>Включите VPN или прокси и нажмите кнопку ещё раз.</li>
+          <li>Или откройте Telegram и найдите бота по имени: <span class="botname mono">@trainerinterview_bot</span> <button type="button" class="copy">скопировать</button></li>
+          <li class="vk-box">Или напишите мне во ВКонтакте — там ограничений нет: <a data-vk href="#">открыть переписку</a></li>
+        </ol>
+      </div>
     </div>
 
     <div class="demo">
@@ -423,6 +458,10 @@
         <p class="faq-a">Да. Сейчас идёт проверка продукта на живых людях, и мест немного. Взамен я прошу только честный отзыв — что оказалось полезным, а что пустым.</p>
       </details>
       <details>
+        <summary>У меня не открывается Telegram. Как быть?</summary>
+        <p class="faq-a">Telegram в России ограничивают, поэтому ссылка может не сработать — включите VPN или прокси и нажмите кнопку ещё раз. Если Telegram открывается, но кнопка всё равно ничего не делает, найдите бота вручную по имени <span class="botname mono">@trainerinterview_bot</span>. Совсем не пользуетесь Telegram<span class="vk-box"> — напишите мне <a data-vk href="#">во ВКонтакте</a>, сессию проведём там</span>.</p>
+      </details>
+      <details>
         <summary>Подойдёт ли это моей профессии?</summary>
         <p class="faq-a">Любая вакансия, любая отрасль. Проверено пока на одном человеке в одной отрасли — если попробуете, узнаем вместе, работает ли шире. Именно поэтому сейчас бесплатно.</p>
       </details>
@@ -433,11 +472,20 @@
     <h2>Попробуем?</h2>
     <p>Сессия бесплатная. Взамен прошу только честный отзыв — что оказалось полезным, а что пустым.</p>
     <div class="cta-box">
-      <a class="cta" href="https://t.me/trainerinterview_bot?start=site" onclick="ym(111188131,'reachGoal','start_click')">Начать бесплатную сессию</a>
+      <a class="cta" href="https://t.me/trainerinterview_bot?start=site" data-source="site">Начать бесплатную сессию</a>
+      <p class="cta-note">Telegram в России ограничивают — нужен VPN или прокси.<span class="vk-box"> Без него просто <a data-vk href="#">напишите мне во ВКонтакте</a>.</span></p>
+      <div class="fallback" hidden>
+        <p><b>Не открылось?</b> Так и бывает: Telegram в России ограничивают.</p>
+        <ol>
+          <li>Включите VPN или прокси и нажмите кнопку ещё раз.</li>
+          <li>Или откройте Telegram и найдите бота по имени: <span class="botname mono">@trainerinterview_bot</span> <button type="button" class="copy">скопировать</button></li>
+          <li class="vk-box">Или напишите мне во ВКонтакте — там ограничений нет: <a data-vk href="#">открыть переписку</a></li>
+        </ol>
+      </div>
     </div>
   </div>
 
-  <footer class="mono">Тренажёр собеседований · <a href="https://t.me/trainerinterview_bot?start=footer">@trainerinterview_bot</a></footer>
+  <footer class="mono">Тренажёр собеседований · <a href="https://t.me/trainerinterview_bot?start=footer">@trainerinterview_bot</a><span class="vk-box"> · <a data-vk href="#">ВКонтакте</a></span></footer>
 </div>
 
 <!-- Яндекс.Метрика.
@@ -457,6 +505,110 @@
    ym(111188131, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", referrer: document.referrer, url: location.href, accurateTrackBounce:true, trackLinks:true});
 </script>
 <noscript><div><img src="https://mc.yandex.ru/watch/111188131" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+
+<!-- Переход в бота.
+     Обычная ссылка https://t.me/... в России не открывается: адрес t.me
+     блокируют, браузер висит и человек уходит. Поэтому кнопка открывает
+     приложение напрямую адресом tg://resolve — его обрабатывает не браузер,
+     а операционная система, в интернет по заблокированному адресу никто не
+     стучится.
+     Если приложение не открылось (не установлено или Telegram недоступен без
+     VPN) — через полторы секунды под кнопкой раскрывается блок с запасными
+     способами: VPN, имя бота для ручного поиска, переписка во ВКонтакте.
+
+     ЧТОБЫ ПОМЕНЯТЬ АДРЕС ВК — правьте одну строку VK ниже.
+     Пока в ней осталось слово ЗАМЕНИТЕ, все ссылки на ВК скрыты: лучше без
+     них, чем битые. -->
+<script>
+(function () {
+  var BOT = "trainerinterview_bot";
+  var VK  = "https://vk.me/ЗАМЕНИТЕ_НА_СВОЙ_АДРЕС";
+
+  var each = function (sel, fn) {
+    Array.prototype.forEach.call(document.querySelectorAll(sel), fn);
+  };
+  function goal(name) {
+    try { ym(111188131, 'reachGoal', name); } catch (e) {}
+  }
+
+  // --- Ссылки на ВКонтакте ---
+  var vkReady = VK.indexOf("ЗАМЕНИТЕ") === -1;
+  each('[data-vk]', function (link) {
+    if (vkReady) {
+      link.href = VK;
+      link.target = "_blank";
+      link.rel = "noopener";
+      link.addEventListener('click', function () { goal('vk_click'); });
+    } else {
+      var box = link.closest ? link.closest('.vk-box') : null;
+      (box || link).hidden = true;
+    }
+  });
+
+  // --- Кнопка «Начать бесплатную сессию» ---
+  each('.cta', function (btn) {
+    btn.addEventListener('click', function (e) {
+      e.preventDefault();
+      goal('start_click');
+
+      var source = btn.getAttribute('data-source') || 'site';
+      var box = btn.parentNode.querySelector('.fallback');
+      var startedAt = Date.now();
+      var leftPage = false;
+      function mark() { leftPage = true; }
+
+      // Приложение открылось — страница уходит в фон, и это единственный
+      // надёжный признак успеха.
+      document.addEventListener('visibilitychange', mark);
+      window.addEventListener('pagehide', mark);
+
+      window.location.href = 'tg://resolve?domain=' + BOT + '&start=' + source;
+
+      setTimeout(function () {
+        document.removeEventListener('visibilitychange', mark);
+        window.removeEventListener('pagehide', mark);
+        // Долгая пауза в таймере тоже означает, что нас сворачивали.
+        if (leftPage || document.hidden || Date.now() - startedAt > 2600) return;
+        if (box && box.hidden) {
+          box.hidden = false;
+          goal('fallback_shown');
+          if (box.scrollIntoView) {
+            box.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+          }
+        }
+      }, 1500);
+    });
+  });
+
+  // --- Кнопка «скопировать» рядом с именем бота ---
+  each('.copy', function (btn) {
+    btn.addEventListener('click', function () {
+      var text = '@' + BOT;
+      var label = btn.textContent;
+      function done() {
+        goal('copy_name');
+        btn.textContent = 'скопировано';
+        setTimeout(function () { btn.textContent = label; }, 1800);
+      }
+      function oldWay() {
+        var area = document.createElement('textarea');
+        area.value = text;
+        area.style.position = 'fixed';
+        area.style.left = '-9999px';
+        document.body.appendChild(area);
+        area.select();
+        try { document.execCommand('copy'); done(); } catch (err) {}
+        document.body.removeChild(area);
+      }
+      if (navigator.clipboard) {
+        navigator.clipboard.writeText(text).then(done, oldWay);
+      } else {
+        oldWay();
+      }
+    });
+  });
+})();
+</script>
 <!-- /Yandex.Metrika counter -->
 
 </body>

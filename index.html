@@ -591,8 +591,8 @@
   <div class="modal-back" data-close></div>
   <div class="modal-card">
     <button type="button" class="modal-x" data-close aria-label="Закрыть">×</button>
-    <h2 class="modal-title" id="helper-title">Telegram не открылся</h2>
-    <p class="modal-lede">Так и бывает: в России его ограничивают. Есть три способа попасть на сессию — любой из них рабочий.</p>
+    <h2 class="modal-title" id="helper-title">Открываю Telegram</h2>
+    <p class="modal-lede">Если он не открылся или открылся, но не работает — в России его ограничивают. Тогда вот другие пути, любой рабочий.</p>
     <ol class="modal-steps">
       <li>
         <b>Оставьте заявку прямо здесь</b> — без Telegram и без VPN. Я отвечу тем способом, который вы укажете.
@@ -770,26 +770,17 @@
     if (!modal.hidden && (e.key === 'Escape' || e.key === 'Esc')) closeModal();
   });
 
-  // --- Попытка открыть приложение ---
+  // --- Открыть приложение ---
+  //
+  // Раньше здесь стоял таймер: если через полторы секунды страница не ушла
+  // в фон, показывали подсказку. Проверка оказалась ложной в обе стороны —
+  // Telegram запускается и тогда, когда связи нет, и просто висит пустой.
+  // Человек возвращался на сайт, а подсказка всплывала невпопад или не
+  // всплывала вовсе. Угадывание убрано: сразу после запуска показываем
+  // спокойный экран «не сработало — вот другой путь».
   function tryOpen(source) {
-    var startedAt = Date.now();
-    var leftPage = false;
-    function mark() { leftPage = true; }
-
-    // Приложение открылось — страница уходит в фон, и это единственный
-    // надёжный признак успеха.
-    document.addEventListener('visibilitychange', mark);
-    window.addEventListener('pagehide', mark);
-
     window.location.href = 'tg://resolve?domain=' + BOT + '&start=' + source;
-
-    setTimeout(function () {
-      document.removeEventListener('visibilitychange', mark);
-      window.removeEventListener('pagehide', mark);
-      // Долгая пауза в таймере тоже означает, что нас сворачивали.
-      if (leftPage || document.hidden || Date.now() - startedAt > 2600) return;
-      openModal();
-    }, 1500);
+    setTimeout(openModal, 400);
   }
 
   var lastSource = 'site';

@@ -292,6 +292,18 @@
   .form-error { color: #C0392B; font-size: 14px; margin: 10px 0 0; }
   .form-done { text-align: left; }
   .form-done h2 { margin-bottom: 10px; }
+  .pick { margin-bottom: 22px; }
+  .pick-alt { margin-bottom: 0; }
+  .pick-second {
+    background: none; color: var(--accent);
+    border: 1px solid var(--accent);
+  }
+  .pick-second:hover { background: var(--accent-soft); filter: none; }
+  .pick-note {
+    font-size: 13.5px; color: var(--muted); margin: 9px 0 0;
+    text-align: left; hyphens: manual;
+  }
+
   .alt-form {
     display: inline-block; margin-top: 14px; font-size: 14px;
     background: none; border: 0; padding: 0; cursor: pointer;
@@ -474,7 +486,6 @@
       <a class="cta" href="https://t.me/trainerinterview_bot?start=site" data-source="site">Начать бесплатную сессию</a>
       <p class="cta-note">Около 20 минут перепиской. Платить ничего не нужно.</p>
       <p class="cta-note">Telegram в России ограничивают — нужен VPN или прокси.</p>
-      <p class="cta-note"><button type="button" class="alt-form" data-open-form>Или оставьте заявку без Telegram</button></p>
     </div>
 
     <div class="demo">
@@ -567,7 +578,6 @@
     <div class="cta-box">
       <a class="cta" href="https://t.me/trainerinterview_bot?start=site" data-source="site">Начать бесплатную сессию</a>
       <p class="cta-note">Telegram в России ограничивают — нужен VPN или прокси.</p>
-      <p class="cta-note"><button type="button" class="alt-form" data-open-form>Или оставьте заявку без Telegram</button></p>
     </div>
   </div>
 
@@ -601,6 +611,29 @@
         <a class="modal-vk" data-vk href="#">Написать во ВКонтакте</a>
       </li>
     </ol>
+  </div>
+</div>
+
+<!-- Окно выбора способа. Раньше кнопка сразу пыталась открыть Telegram,
+     а форма пряталась за неудачей. Замер показал, что неудача — основной
+     сценарий: у шестерых из десяти Telegram не открывается. Прятать за ней
+     единственный рабочий путь нельзя, поэтому выбор показывается сразу.
+     Telegram оставлен главным: у кого он работает, боту удобнее. -->
+<div class="modal" id="choice" hidden role="dialog" aria-modal="true" aria-labelledby="choice-title">
+  <div class="modal-back" data-close></div>
+  <div class="modal-card">
+    <button type="button" class="modal-x" data-close aria-label="Закрыть">×</button>
+    <h2 class="modal-title" id="choice-title">Как вам удобнее?</h2>
+
+    <div class="pick">
+      <button type="button" class="form-send" data-pick-tg>Открыть в Telegram</button>
+      <p class="pick-note">Бот сам напомнит и проведёт по шагам. Если Telegram у вас открывается — так удобнее всего.</p>
+    </div>
+
+    <div class="pick pick-alt">
+      <button type="button" class="form-send pick-second" data-open-form>Оставить заявку на сайте</button>
+      <p class="pick-note">Ничего устанавливать не нужно. Отвечу туда, куда скажете: Telegram, ВКонтакте, почта или телефон.</p>
+    </div>
   </div>
 </div>
 
@@ -761,12 +794,41 @@
 
   var lastSource = 'site';
 
+  // --- Окно выбора способа ---
+  var choice = document.getElementById('choice');
+
+  function openChoice() {
+    if (!choice.hidden) return;
+    choice.hidden = false;
+    document.body.classList.add('locked');
+    var x = choice.querySelector('.modal-x');
+    if (x) x.focus();
+  }
+  function closeChoice() {
+    choice.hidden = true;
+    document.body.classList.remove('locked');
+  }
+  each('#choice [data-close]', function (el) {
+    el.addEventListener('click', closeChoice);
+  });
+  document.addEventListener('keydown', function (e) {
+    if (!choice.hidden && (e.key === 'Escape' || e.key === 'Esc')) closeChoice();
+  });
+
   // --- Кнопка «Начать бесплатную сессию» ---
   each('.cta', function (btn) {
     btn.addEventListener('click', function (e) {
       e.preventDefault();
       goal('start_click');
       lastSource = btn.getAttribute('data-source') || 'site';
+      openChoice();
+    });
+  });
+
+  each('[data-pick-tg]', function (btn) {
+    btn.addEventListener('click', function () {
+      goal('pick_telegram');
+      closeChoice();
       tryOpen(lastSource);
     });
   });
@@ -788,6 +850,7 @@
 
   function openForm() {
     closeModal();
+    if (typeof closeChoice === 'function') closeChoice();
     formbox.hidden = false;
     document.body.classList.add('locked');
     goal('form_open');

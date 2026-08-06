@@ -260,6 +260,43 @@
   .modal-retry:focus-visible, .modal-vk:focus-visible {
     outline: 2px solid var(--ink); outline-offset: 2px;
   }
+
+  /* --- Форма заявки: путь без мессенджеров ---------------------------- */
+  .field { margin-bottom: 16px; }
+  .field label {
+    display: block; font-size: 13.5px; font-weight: 600;
+    margin-bottom: 6px; color: var(--ink);
+  }
+  .field .hint { font-weight: 400; color: var(--muted); }
+  .field textarea, .field input, .field select {
+    width: 100%; font: inherit; font-size: 15px;
+    color: var(--ink); background: var(--paper);
+    border: 1px solid var(--line); border-radius: 6px;
+    padding: 10px 12px;
+  }
+  .field textarea { min-height: 76px; resize: vertical; }
+  .field textarea:focus, .field input:focus, .field select:focus {
+    outline: 2px solid var(--accent); outline-offset: 0; border-color: var(--accent);
+  }
+  .field.bad textarea, .field.bad input { border-color: #C0392B; }
+  .contact-row { display: grid; grid-template-columns: 40% 1fr; gap: 8px; }
+  .trap { position: absolute; left: -9999px; width: 1px; height: 1px; }
+  .form-send {
+    display: block; width: 100%; font: inherit; font-size: 16px; font-weight: 600;
+    cursor: pointer; background: var(--accent); color: var(--on-accent);
+    border: 0; border-radius: 4px; padding: 14px 20px; margin-top: 4px;
+  }
+  .form-send:hover { filter: brightness(1.07); }
+  .form-send[disabled] { opacity: 0.6; cursor: default; }
+  .form-note { font-size: 13px; color: var(--muted); margin: 12px 0 0; text-align: left; }
+  .form-error { color: #C0392B; font-size: 14px; margin: 10px 0 0; }
+  .form-done { text-align: left; }
+  .form-done h2 { margin-bottom: 10px; }
+  .alt-form {
+    display: inline-block; margin-top: 14px; font-size: 14px;
+    background: none; border: 0; padding: 0; cursor: pointer;
+    color: var(--accent); text-decoration: underline; font-family: inherit;
+  }
   body.locked { overflow: hidden; }
   @media (max-width: 420px) {
     .modal { padding: 12px; }
@@ -436,7 +473,8 @@
     <div class="cta-box">
       <a class="cta" href="https://t.me/trainerinterview_bot?start=site" data-source="site">Начать бесплатную сессию</a>
       <p class="cta-note">Около 20 минут перепиской. Платить ничего не нужно.</p>
-      <p class="cta-note">Telegram в России ограничивают — нужен VPN или прокси.<span class="vk-box"> Без него просто <a data-vk href="#">напишите мне во ВКонтакте</a>.</span></p>
+      <p class="cta-note">Telegram в России ограничивают — нужен VPN или прокси.</p>
+      <p class="cta-note"><button type="button" class="alt-form" data-open-form>Или оставьте заявку без Telegram</button></p>
     </div>
 
     <div class="demo">
@@ -528,7 +566,8 @@
     <p>Сессия бесплатная. Взамен прошу только честный отзыв — что оказалось полезным, а что пустым.</p>
     <div class="cta-box">
       <a class="cta" href="https://t.me/trainerinterview_bot?start=site" data-source="site">Начать бесплатную сессию</a>
-      <p class="cta-note">Telegram в России ограничивают — нужен VPN или прокси.<span class="vk-box"> Без него просто <a data-vk href="#">напишите мне во ВКонтакте</a>.</span></p>
+      <p class="cta-note">Telegram в России ограничивают — нужен VPN или прокси.</p>
+      <p class="cta-note"><button type="button" class="alt-form" data-open-form>Или оставьте заявку без Telegram</button></p>
     </div>
   </div>
 
@@ -546,7 +585,11 @@
     <p class="modal-lede">Так и бывает: в России его ограничивают. Есть три способа попасть на сессию — любой из них рабочий.</p>
     <ol class="modal-steps">
       <li>
-        <b>Включите VPN или прокси</b> и попробуйте снова.
+        <b>Оставьте заявку прямо здесь</b> — без Telegram и без VPN. Я отвечу тем способом, который вы укажете.
+        <button type="button" class="modal-retry" data-open-form>Оставить заявку</button>
+      </li>
+      <li>
+        <b>Или включите VPN</b> и попробуйте снова.
         <button type="button" class="modal-retry" data-retry>Попробовать ещё раз</button>
       </li>
       <li>
@@ -558,6 +601,59 @@
         <a class="modal-vk" data-vk href="#">Написать во ВКонтакте</a>
       </li>
     </ol>
+  </div>
+</div>
+
+<!-- Форма заявки. Путь для тех, у кого Telegram не открывается или кому он
+     не нужен: человек не переходит никуда, а заполняет три поля там же, где
+     стоит. Отправляется на собственный сервер владельца — сторонние формы
+     отвергнуты, потому что через них чужие резюме уходили бы третьей стороне. -->
+<div class="modal" id="formbox" hidden role="dialog" aria-modal="true" aria-labelledby="form-title">
+  <div class="modal-back" data-close></div>
+  <div class="modal-card">
+    <button type="button" class="modal-x" data-close aria-label="Закрыть">×</button>
+
+    <div id="form-live">
+      <h2 class="modal-title" id="form-title">Заявка без мессенджеров</h2>
+      <p class="modal-lede">Три поля — и всё. Я разберу вашу вакансию с резюме и напишу вам туда, куда скажете.</p>
+
+      <form id="zayavka" novalidate>
+        <div class="field" data-field="vacancy">
+          <label for="f-vac">Вакансия <span class="hint">— ссылка или текст</span></label>
+          <textarea id="f-vac" name="vacancy" placeholder="Вставьте ссылку на вакансию с любого сайта или её текст"></textarea>
+        </div>
+
+        <div class="field" data-field="resume">
+          <label for="f-res">Ваше резюме <span class="hint">— ссылка или текст</span></label>
+          <textarea id="f-res" name="resume" placeholder="Ссылка на резюме или его текст. Файл сможете прислать потом"></textarea>
+        </div>
+
+        <div class="field" data-field="contact">
+          <label for="f-con">Куда вам написать</label>
+          <div class="contact-row">
+            <select id="f-kind" name="contact_kind">
+              <option value="telegram">Telegram</option>
+              <option value="vk">ВКонтакте</option>
+              <option value="email">Почта</option>
+              <option value="phone">Телефон</option>
+            </select>
+            <input id="f-con" name="contact" placeholder="@имя, ссылка, почта или номер">
+          </div>
+        </div>
+
+        <input class="trap" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
+
+        <button type="submit" class="form-send">Отправить заявку</button>
+        <p class="form-error" id="form-error" hidden></p>
+        <p class="form-note">Бесплатно. Резюме уходит на мой собственный сервер и никому больше не передаётся.</p>
+      </form>
+    </div>
+
+    <div id="form-done" class="form-done" hidden>
+      <h2 class="modal-title">Заявка у меня</h2>
+      <p class="modal-lede">Спасибо. Сессии веду лично, поэтому отвечаю не мгновенно — но обязательно напишу тем способом, который вы указали.</p>
+      <button type="button" class="form-send" data-close>Закрыть</button>
+    </div>
   </div>
 </div>
 
@@ -681,6 +777,86 @@
       goal('retry_click');
       closeModal();
       tryOpen(lastSource);
+    });
+  });
+
+  // --- Форма заявки ---
+  var API = "https://sobez.mindandmotion.ru/zayavka";
+  var formbox = document.getElementById('formbox');
+  var form = document.getElementById('zayavka');
+  var formError = document.getElementById('form-error');
+
+  function openForm() {
+    closeModal();
+    formbox.hidden = false;
+    document.body.classList.add('locked');
+    goal('form_open');
+    var first = document.getElementById('f-vac');
+    if (first) first.focus();
+  }
+  function closeForm() {
+    formbox.hidden = true;
+    document.body.classList.remove('locked');
+  }
+
+  each('[data-open-form]', function (btn) {
+    btn.addEventListener('click', openForm);
+  });
+  each('#formbox [data-close]', function (el) {
+    el.addEventListener('click', closeForm);
+  });
+  document.addEventListener('keydown', function (e) {
+    if (!formbox.hidden && (e.key === 'Escape' || e.key === 'Esc')) closeForm();
+  });
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var button = form.querySelector('.form-send');
+
+    var payload = {
+      vacancy: form.vacancy.value.trim(),
+      resume: form.resume.value.trim(),
+      contact_kind: form.contact_kind.value,
+      contact: form.contact.value.trim(),
+      website: form.website.value,
+      source: 'site'
+    };
+
+    // Проверяем здесь же, чтобы человек не ждал ответа сервера ради
+    // сообщения, которое можно показать сразу.
+    var bad = [];
+    if (payload.vacancy.length < 25) bad.push('vacancy');
+    if (payload.resume.length < 25) bad.push('resume');
+    if (payload.contact.length < 3) bad.push('contact');
+    each('#zayavka .field', function (f) { f.classList.remove('bad'); });
+    if (bad.length) {
+      bad.forEach(function (name) {
+        var f = form.querySelector('[data-field="' + name + '"]');
+        if (f) f.classList.add('bad');
+      });
+      formError.textContent = 'Заполните выделенные поля — ссылки тоже подойдут.';
+      formError.hidden = false;
+      return;
+    }
+
+    formError.hidden = true;
+    button.disabled = true;
+    button.textContent = 'Отправляю…';
+
+    fetch(API, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    }).then(function (r) {
+      if (!r.ok) throw new Error('bad');
+      goal('form_sent');
+      document.getElementById('form-live').hidden = true;
+      document.getElementById('form-done').hidden = false;
+    }).catch(function () {
+      formError.textContent = 'Не отправилось. Попробуйте ещё раз или напишите мне во ВКонтакте.';
+      formError.hidden = false;
+      button.disabled = false;
+      button.textContent = 'Отправить заявку';
     });
   });
 

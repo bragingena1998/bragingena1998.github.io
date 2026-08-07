@@ -292,6 +292,13 @@
   .form-error { color: #C0392B; font-size: 14px; margin: 10px 0 0; }
   .form-done { text-align: left; }
   .form-done h2 { margin-bottom: 10px; }
+  .onpage-form {
+    background: var(--raised); border: 1px solid var(--line);
+    border-radius: 10px; padding: 24px 22px; margin-top: 22px;
+    box-shadow: var(--shadow);
+  }
+  .onpage-form .modal-title, .onpage-form .modal-lede { display: none; }
+
   .pick { margin-bottom: 22px; }
   .pick-alt { margin-bottom: 0; }
   .pick-second {
@@ -572,6 +579,56 @@
     </div>
   </section>
 
+
+  <section class="block">
+    <h2>Оставить заявку прямо здесь</h2>
+    <p>Если Telegram у вас не открывается или вы им не пользуетесь — заполните поля ниже. Отвечу тем способом, который укажете.</p>
+    <div class="onpage-form">
+    <div class="form-live">
+      <h2 class="modal-title" id="form-title">Заявка без мессенджеров</h2>
+      <p class="modal-lede">Три поля — и всё. Я разберу вашу вакансию с резюме и напишу вам туда, куда скажете.</p>
+
+      <form class="zayavka-form" novalidate>
+        <div class="field" data-field="vacancy">
+          <label>Вакансия <span class="hint">— ссылка или текст</span></label>
+          <textarea name="vacancy" placeholder="Вставьте ссылку на вакансию с любого сайта или её текст"></textarea>
+        </div>
+
+        <div class="field" data-field="resume">
+          <label>Ваше резюме <span class="hint">— если под рукой, не обязательно</span></label>
+          <textarea name="resume" placeholder="Ссылка или текст. Нет под рукой — оставьте пустым, спрошу в переписке"></textarea>
+        </div>
+
+        <div class="field" data-field="contact">
+          <label>Куда вам написать</label>
+          <div class="contact-row">
+            <select name="contact_kind">
+              <option value="telegram">Telegram</option>
+              <option value="vk">ВКонтакте</option>
+              <option value="email">Почта</option>
+              <option value="phone">Телефон</option>
+            </select>
+            <input name="contact" placeholder="@имя, ссылка, почта или номер">
+          </div>
+        </div>
+
+        <input class="trap" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
+
+        <button type="submit" class="form-send">Отправить заявку</button>
+        <p class="form-error" hidden></p>
+        <p class="form-note">Бесплатно. Резюме уходит на мой собственный сервер и никому больше не передаётся.</p>
+      </form>
+    </div>
+
+    <div class="form-done" hidden>
+      <h2 class="modal-title">Заявка у меня</h2>
+      <p class="modal-lede">Спасибо. Сессии веду лично, поэтому отвечаю не мгновенно — но обязательно напишу тем способом, который вы указали.</p>
+      <button type="button" class="form-send" data-close>Закрыть</button>
+    </div>
+  </div>
+    </div>
+  </section>
+
   <div class="final">
     <h2>Попробуем?</h2>
     <p>Сессия бесплатная. Взамен прошу только честный отзыв — что оказалось полезным, а что пустым.</p>
@@ -584,55 +641,49 @@
   <footer class="mono">Тренажёр собеседований · <a href="https://t.me/trainerinterview_bot?start=footer">@trainerinterview_bot</a><span class="vk-box"> · <a data-vk href="#">ВКонтакте</a></span></footer>
 </div>
 
-<!-- Окно с запасными способами. Показывается, только если приложение Telegram
-     не открылось после нажатия кнопки. Одно на всю страницу — обе кнопки
-     открывают его. -->
-<div class="modal" id="helper" hidden role="dialog" aria-modal="true" aria-labelledby="helper-title">
-  <div class="modal-back" data-close></div>
-  <div class="modal-card">
-    <button type="button" class="modal-x" data-close aria-label="Закрыть">×</button>
-    <h2 class="modal-title" id="helper-title">Открываю Telegram</h2>
-    <p class="modal-lede">Если он не открылся или открылся, но не работает — в России его ограничивают. Тогда вот другие пути, любой рабочий.</p>
-    <ol class="modal-steps">
-      <li>
-        <b>Оставьте заявку прямо здесь</b> — без Telegram и без VPN. Я отвечу тем способом, который вы укажете.
-        <button type="button" class="modal-retry" data-open-form>Оставить заявку</button>
-      </li>
-      <li>
-        <b>Или включите VPN</b> и попробуйте снова.
-        <button type="button" class="modal-retry" data-retry>Попробовать ещё раз</button>
-      </li>
-      <li>
-        <b>Или найдите бота вручную.</b> Откройте Telegram и вставьте в поиск имя:
-        <span class="modal-copyline"><span class="botname mono">@trainerinterview_bot</span> <button type="button" class="copy">скопировать</button></span>
-      </li>
-      <li class="vk-box">
-        <b>Или напишите мне во ВКонтакте</b> — там ограничений нет, сессию проведём прямо в переписке.
-        <a class="modal-vk" data-vk href="#">Написать во ВКонтакте</a>
-      </li>
-    </ol>
-  </div>
-</div>
+<!-- Окно с развилкой.
+     Кнопка на странице ничего не открывает сама — она открывает это окно.
+     Так сделано потому, что текст под кнопкой не читают: человек видит
+     кнопку и жмёт. Окно нельзя пролистать мимо, его надо закрыть действием,
+     поэтому предупреждение об ограничении Telegram доходит ДО того, как
+     человек упрётся в мёртвое приложение, а не после.
 
-<!-- Окно выбора способа. Раньше кнопка сразу пыталась открыть Telegram,
-     а форма пряталась за неудачей. Замер показал, что неудача — основной
-     сценарий: у шестерых из десяти Telegram не открывается. Прятать за ней
-     единственный рабочий путь нельзя, поэтому выбор показывается сразу.
-     Telegram оставлен главным: у кого он работает, боту удобнее. -->
+     Обе строки — кнопки, а не пояснения: игнорировать нечего.
+
+     Вторая ступень показывается после запуска Telegram и не закрывается.
+     Вернувшийся из неоткрывшегося приложения попадает на тот же экран, а не
+     на всплывшую невесть откуда подсказку. Кнопка «скопировать» там не
+     случайно: из семерых, у кого Telegram не открылся, сработала только она.
+     VPN, ВКонтакте и повторная попытка дали ноль. -->
 <div class="modal" id="choice" hidden role="dialog" aria-modal="true" aria-labelledby="choice-title">
   <div class="modal-back" data-close></div>
   <div class="modal-card">
     <button type="button" class="modal-x" data-close aria-label="Закрыть">×</button>
-    <h2 class="modal-title" id="choice-title">Как вам удобнее?</h2>
 
-    <div class="pick">
-      <button type="button" class="form-send" data-pick-tg>Открыть в Telegram</button>
-      <p class="pick-note">Бот сам напомнит и проведёт по шагам. Если Telegram у вас открывается — так удобнее всего.</p>
+    <div id="choice-start">
+      <h2 class="modal-title" id="choice-title">Telegram в России ограничен</h2>
+      <p class="modal-lede">Бот живёт в Telegram, и без VPN или прокси он не откроется. Это ограничение связи, а не нашего сервиса.</p>
+
+      <div class="pick">
+        <button type="button" class="form-send" data-pick-tg>У меня есть VPN — открыть</button>
+      </div>
+
+      <div class="pick pick-alt">
+        <button type="button" class="form-send pick-second" data-open-form>Оставить заявку на сайте</button>
+        <p class="pick-note">Без Telegram и без VPN. Отвечу туда, куда скажете: ВКонтакте, почта или телефон.</p>
+      </div>
     </div>
 
-    <div class="pick pick-alt">
-      <button type="button" class="form-send pick-second" data-open-form>Оставить заявку на сайте</button>
-      <p class="pick-note">Ничего устанавливать не нужно. Отвечу туда, куда скажете: Telegram, ВКонтакте, почта или телефон.</p>
+    <div id="choice-after" hidden>
+      <h2 class="modal-title">Открываю Telegram</h2>
+      <p class="modal-lede">Не открылся? Найдите бота вручную — вставьте это имя в поиск Telegram:</p>
+
+      <p class="modal-copyline"><span class="botname mono">@trainerinterview_bot</span> <button type="button" class="copy">скопировать</button></p>
+
+      <div class="pick pick-alt" style="margin-top: 24px">
+        <button type="button" class="form-send pick-second" data-open-form>Оставить заявку на сайте</button>
+        <p class="pick-note">Если с Telegram не вышло — этот путь работает всегда.</p>
+      </div>
     </div>
   </div>
 </div>
@@ -646,43 +697,43 @@
   <div class="modal-card">
     <button type="button" class="modal-x" data-close aria-label="Закрыть">×</button>
 
-    <div id="form-live">
+    <div class="form-live">
       <h2 class="modal-title" id="form-title">Заявка без мессенджеров</h2>
       <p class="modal-lede">Три поля — и всё. Я разберу вашу вакансию с резюме и напишу вам туда, куда скажете.</p>
 
-      <form id="zayavka" novalidate>
+      <form class="zayavka-form" novalidate>
         <div class="field" data-field="vacancy">
-          <label for="f-vac">Вакансия <span class="hint">— ссылка или текст</span></label>
-          <textarea id="f-vac" name="vacancy" placeholder="Вставьте ссылку на вакансию с любого сайта или её текст"></textarea>
+          <label>Вакансия <span class="hint">— ссылка или текст</span></label>
+          <textarea name="vacancy" placeholder="Вставьте ссылку на вакансию с любого сайта или её текст"></textarea>
         </div>
 
         <div class="field" data-field="resume">
-          <label for="f-res">Ваше резюме <span class="hint">— ссылка или текст</span></label>
-          <textarea id="f-res" name="resume" placeholder="Ссылка на резюме или его текст. Файл сможете прислать потом"></textarea>
+          <label>Ваше резюме <span class="hint">— если под рукой, не обязательно</span></label>
+          <textarea name="resume" placeholder="Ссылка или текст. Нет под рукой — оставьте пустым, спрошу в переписке"></textarea>
         </div>
 
         <div class="field" data-field="contact">
-          <label for="f-con">Куда вам написать</label>
+          <label>Куда вам написать</label>
           <div class="contact-row">
-            <select id="f-kind" name="contact_kind">
+            <select name="contact_kind">
               <option value="telegram">Telegram</option>
               <option value="vk">ВКонтакте</option>
               <option value="email">Почта</option>
               <option value="phone">Телефон</option>
             </select>
-            <input id="f-con" name="contact" placeholder="@имя, ссылка, почта или номер">
+            <input name="contact" placeholder="@имя, ссылка, почта или номер">
           </div>
         </div>
 
         <input class="trap" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
 
         <button type="submit" class="form-send">Отправить заявку</button>
-        <p class="form-error" id="form-error" hidden></p>
+        <p class="form-error" hidden></p>
         <p class="form-note">Бесплатно. Резюме уходит на мой собственный сервер и никому больше не передаётся.</p>
       </form>
     </div>
 
-    <div id="form-done" class="form-done" hidden>
+    <div class="form-done" hidden>
       <h2 class="modal-title">Заявка у меня</h2>
       <p class="modal-lede">Спасибо. Сессии веду лично, поэтому отвечаю не мгновенно — но обязательно напишу тем способом, который вы указали.</p>
       <button type="button" class="form-send" data-close>Закрыть</button>
@@ -748,48 +799,14 @@
     }
   });
 
-  // --- Окно с запасными способами ---
-  var modal = document.getElementById('helper');
-
-  function openModal() {
-    if (!modal.hidden) return;
-    modal.hidden = false;
-    document.body.classList.add('locked');
-    goal('fallback_shown');
-    var x = modal.querySelector('.modal-x');
-    if (x) x.focus();
-  }
-  function closeModal() {
-    modal.hidden = true;
-    document.body.classList.remove('locked');
-  }
-  each('[data-close]', function (el) {
-    el.addEventListener('click', closeModal);
-  });
-  document.addEventListener('keydown', function (e) {
-    if (!modal.hidden && (e.key === 'Escape' || e.key === 'Esc')) closeModal();
-  });
-
-  // --- Открыть приложение ---
-  //
-  // Раньше здесь стоял таймер: если через полторы секунды страница не ушла
-  // в фон, показывали подсказку. Проверка оказалась ложной в обе стороны —
-  // Telegram запускается и тогда, когда связи нет, и просто висит пустой.
-  // Человек возвращался на сайт, а подсказка всплывала невпопад или не
-  // всплывала вовсе. Угадывание убрано: сразу после запуска показываем
-  // спокойный экран «не сработало — вот другой путь».
-  function tryOpen(source) {
-    window.location.href = 'tg://resolve?domain=' + BOT + '&start=' + source;
-    setTimeout(openModal, 400);
-  }
-
-  var lastSource = 'site';
-
-  // --- Окно выбора способа ---
+  // --- Окно с развилкой ---
   var choice = document.getElementById('choice');
+  var stepStart = document.getElementById('choice-start');
+  var stepAfter = document.getElementById('choice-after');
 
   function openChoice() {
-    if (!choice.hidden) return;
+    stepStart.hidden = false;
+    stepAfter.hidden = true;
     choice.hidden = false;
     document.body.classList.add('locked');
     var x = choice.querySelector('.modal-x');
@@ -802,11 +819,22 @@
   each('#choice [data-close]', function (el) {
     el.addEventListener('click', closeChoice);
   });
-  document.addEventListener('keydown', function (e) {
-    if (!choice.hidden && (e.key === 'Escape' || e.key === 'Esc')) closeChoice();
-  });
 
-  // --- Кнопка «Начать бесплатную сессию» ---
+  // --- Открыть приложение ---
+  //
+  // Раньше здесь стоял таймер: если через полторы секунды страница не ушла
+  // в фон — показывали подсказку. Проверка врала в обе стороны: Telegram
+  // запускается и без связи, просто висит пустым. Угадывание убрано —
+  // вторая ступень окна показывается сразу и остаётся ждать человека.
+  function tryOpen(source) {
+    window.location.href = 'tg://resolve?domain=' + BOT + '&start=' + source;
+    stepStart.hidden = true;
+    stepAfter.hidden = false;
+  }
+
+  var lastSource = 'site';
+
+  // --- Главная кнопка: открывает окно, а не Telegram ---
   each('.cta', function (btn) {
     btn.addEventListener('click', function (e) {
       e.preventDefault();
@@ -819,33 +847,20 @@
   each('[data-pick-tg]', function (btn) {
     btn.addEventListener('click', function () {
       goal('pick_telegram');
-      closeChoice();
       tryOpen(lastSource);
     });
   });
 
-  // --- «Попробовать ещё раз» внутри окна ---
-  each('[data-retry]', function (btn) {
-    btn.addEventListener('click', function () {
-      goal('retry_click');
-      closeModal();
-      tryOpen(lastSource);
-    });
-  });
-
-  // --- Форма заявки ---
+  // --- Форма заявки: одна и та же в окне и блоком на странице ---
   var API = "https://sobez.mindandmotion.ru/zayavka";
   var formbox = document.getElementById('formbox');
-  var form = document.getElementById('zayavka');
-  var formError = document.getElementById('form-error');
 
   function openForm() {
-    closeModal();
-    if (typeof closeChoice === 'function') closeChoice();
+    closeChoice();
     formbox.hidden = false;
     document.body.classList.add('locked');
     goal('form_open');
-    var first = document.getElementById('f-vac');
+    var first = formbox.querySelector('[name="vacancy"]');
     if (first) first.focus();
   }
   function closeForm() {
@@ -860,57 +875,69 @@
     el.addEventListener('click', closeForm);
   });
   document.addEventListener('keydown', function (e) {
-    if (!formbox.hidden && (e.key === 'Escape' || e.key === 'Esc')) closeForm();
+    if (e.key !== 'Escape' && e.key !== 'Esc') return;
+    if (!formbox.hidden) closeForm();
+    else if (!choice.hidden) closeChoice();
   });
 
-  form.addEventListener('submit', function (e) {
-    e.preventDefault();
+  each('.zayavka-form', function (form) {
+    var card = form.closest('.modal-card') || form.closest('.onpage-form');
+    var live = card.querySelector('.form-live');
+    var done = card.querySelector('.form-done');
+    var problem = form.querySelector('.form-error');
     var button = form.querySelector('.form-send');
 
-    var payload = {
-      vacancy: form.vacancy.value.trim(),
-      resume: form.resume.value.trim(),
-      contact_kind: form.contact_kind.value,
-      contact: form.contact.value.trim(),
-      website: form.website.value,
-      source: 'site'
-    };
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
 
-    // Проверяем здесь же, чтобы человек не ждал ответа сервера ради
-    // сообщения, которое можно показать сразу.
-    var bad = [];
-    if (payload.vacancy.length < 25) bad.push('vacancy');
-    if (payload.resume.length < 25) bad.push('resume');
-    if (payload.contact.length < 3) bad.push('contact');
-    each('#zayavka .field', function (f) { f.classList.remove('bad'); });
-    if (bad.length) {
-      bad.forEach(function (name) {
-        var f = form.querySelector('[data-field="' + name + '"]');
-        if (f) f.classList.add('bad');
+      var payload = {
+        vacancy: form.vacancy.value.trim(),
+        resume: form.resume.value.trim(),
+        contact_kind: form.contact_kind.value,
+        contact: form.contact.value.trim(),
+        website: form.website.value,
+        source: 'site'
+      };
+
+      // Резюме не проверяем: оно необязательное. Это самое трудное поле,
+      // человек на телефоне, и достать его негде — доспросим в переписке.
+      var bad = [];
+      if (payload.vacancy.length < 25) bad.push('vacancy');
+      if (payload.contact.length < 3) bad.push('contact');
+
+      Array.prototype.forEach.call(form.querySelectorAll('.field'), function (f) {
+        f.classList.remove('bad');
       });
-      formError.textContent = 'Заполните выделенные поля — ссылки тоже подойдут.';
-      formError.hidden = false;
-      return;
-    }
 
-    formError.hidden = true;
-    button.disabled = true;
-    button.textContent = 'Отправляю…';
+      if (bad.length) {
+        bad.forEach(function (name) {
+          var f = form.querySelector('[data-field="' + name + '"]');
+          if (f) f.classList.add('bad');
+        });
+        problem.textContent = 'Заполните выделенные поля — ссылка тоже подойдёт.';
+        problem.hidden = false;
+        return;
+      }
 
-    fetch(API, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(payload)
-    }).then(function (r) {
-      if (!r.ok) throw new Error('bad');
-      goal('form_sent');
-      document.getElementById('form-live').hidden = true;
-      document.getElementById('form-done').hidden = false;
-    }).catch(function () {
-      formError.textContent = 'Не отправилось. Попробуйте ещё раз или напишите мне во ВКонтакте.';
-      formError.hidden = false;
-      button.disabled = false;
-      button.textContent = 'Отправить заявку';
+      problem.hidden = true;
+      button.disabled = true;
+      button.textContent = 'Отправляю…';
+
+      fetch(API, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      }).then(function (r) {
+        if (!r.ok) throw new Error('bad');
+        goal('form_sent');
+        live.hidden = true;
+        done.hidden = false;
+      }).catch(function () {
+        problem.textContent = 'Не отправилось. Попробуйте ещё раз или напишите мне во ВКонтакте.';
+        problem.hidden = false;
+        button.disabled = false;
+        button.textContent = 'Отправить заявку';
+      });
     });
   });
 

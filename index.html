@@ -585,22 +585,17 @@
     <p>Если Telegram у вас не открывается или вы им не пользуетесь — заполните поля ниже. Отвечу тем способом, который укажете.</p>
     <div class="onpage-form">
     <div class="form-live">
-      <h2 class="modal-title" id="form-title">Заявка без мессенджеров</h2>
-      <p class="modal-lede">Три поля — и всё. Я разберу вашу вакансию с резюме и напишу вам туда, куда скажете.</p>
+      <h2 class="modal-title" id="form-title">Оставьте, куда вам написать</h2>
+      <p class="modal-lede">Два поля — и всё. Резюме, время и остальное обсудим в переписке.</p>
 
       <form class="zayavka-form" novalidate>
         <div class="field" data-field="vacancy">
-          <label>Вакансия <span class="hint">— ссылка или текст</span></label>
-          <textarea name="vacancy" placeholder="Вставьте ссылку на вакансию с любого сайта или её текст"></textarea>
-        </div>
-
-        <div class="field" data-field="resume">
-          <label>Ваше резюме <span class="hint">— если под рукой, не обязательно</span></label>
-          <textarea name="resume" placeholder="Ссылка или текст. Нет под рукой — оставьте пустым, спрошу в переписке"></textarea>
+          <label>На какую вакансию целитесь</label>
+          <textarea name="vacancy" rows="2" placeholder="Вставьте ссылку на вакансию — или просто напишите должность и город"></textarea>
         </div>
 
         <div class="field" data-field="contact">
-          <label>Куда вам написать</label>
+          <label>Куда вам ответить</label>
           <div class="contact-row">
             <select name="contact_kind">
               <option value="telegram">Telegram</option>
@@ -612,17 +607,18 @@
           </div>
         </div>
 
+        <input type="hidden" name="resume" value="">
         <input class="trap" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
 
-        <button type="submit" class="form-send">Отправить заявку</button>
+        <button type="submit" class="form-send">Отправить</button>
         <p class="form-error" hidden></p>
-        <p class="form-note">Бесплатно. Резюме уходит на мой собственный сервер и никому больше не передаётся.</p>
+        <p class="form-note">Бесплатно. Отвечу в течение дня. Всё, что вы напишете, лежит на моём собственном сервере и никому не передаётся.</p>
       </form>
     </div>
 
     <div class="form-done" hidden>
-      <h2 class="modal-title">Заявка у меня</h2>
-      <p class="modal-lede">Спасибо. Сессии веду лично, поэтому отвечаю не мгновенно — но обязательно напишу тем способом, который вы указали.</p>
+      <h2 class="modal-title">Записал</h2>
+      <p class="modal-lede">Напишу вам тем способом, который вы указали — обычно в течение дня. Сессии веду лично, поэтому не мгновенно.</p>
       <button type="button" class="form-send" data-close>Закрыть</button>
     </div>
   </div>
@@ -698,22 +694,17 @@
     <button type="button" class="modal-x" data-close aria-label="Закрыть">×</button>
 
     <div class="form-live">
-      <h2 class="modal-title" id="form-title">Заявка без мессенджеров</h2>
-      <p class="modal-lede">Три поля — и всё. Я разберу вашу вакансию с резюме и напишу вам туда, куда скажете.</p>
+      <h2 class="modal-title">Оставьте, куда вам написать</h2>
+      <p class="modal-lede">Два поля — и всё. Резюме, время и остальное обсудим в переписке.</p>
 
       <form class="zayavka-form" novalidate>
         <div class="field" data-field="vacancy">
-          <label>Вакансия <span class="hint">— ссылка или текст</span></label>
-          <textarea name="vacancy" placeholder="Вставьте ссылку на вакансию с любого сайта или её текст"></textarea>
-        </div>
-
-        <div class="field" data-field="resume">
-          <label>Ваше резюме <span class="hint">— если под рукой, не обязательно</span></label>
-          <textarea name="resume" placeholder="Ссылка или текст. Нет под рукой — оставьте пустым, спрошу в переписке"></textarea>
+          <label>На какую вакансию целитесь</label>
+          <textarea name="vacancy" rows="2" placeholder="Вставьте ссылку на вакансию — или просто напишите должность и город"></textarea>
         </div>
 
         <div class="field" data-field="contact">
-          <label>Куда вам написать</label>
+          <label>Куда вам ответить</label>
           <div class="contact-row">
             <select name="contact_kind">
               <option value="telegram">Telegram</option>
@@ -725,17 +716,18 @@
           </div>
         </div>
 
+        <input type="hidden" name="resume" value="">
         <input class="trap" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
 
-        <button type="submit" class="form-send">Отправить заявку</button>
+        <button type="submit" class="form-send">Отправить</button>
         <p class="form-error" hidden></p>
-        <p class="form-note">Бесплатно. Резюме уходит на мой собственный сервер и никому больше не передаётся.</p>
+        <p class="form-note">Бесплатно. Отвечу в течение дня. Всё, что вы напишете, лежит на моём собственном сервере и никому не передаётся.</p>
       </form>
     </div>
 
     <div class="form-done" hidden>
-      <h2 class="modal-title">Заявка у меня</h2>
-      <p class="modal-lede">Спасибо. Сессии веду лично, поэтому отвечаю не мгновенно — но обязательно напишу тем способом, который вы указали.</p>
+      <h2 class="modal-title">Записал</h2>
+      <p class="modal-lede">Напишу вам тем способом, который вы указали — обычно в течение дня. Сессии веду лично, поэтому не мгновенно.</p>
       <button type="button" class="form-send" data-close>Закрыть</button>
     </div>
   </div>
@@ -902,7 +894,7 @@
       // Резюме не проверяем: оно необязательное. Это самое трудное поле,
       // человек на телефоне, и достать его негде — доспросим в переписке.
       var bad = [];
-      if (payload.vacancy.length < 25) bad.push('vacancy');
+      if (payload.vacancy.length < 12) bad.push('vacancy');
       if (payload.contact.length < 3) bad.push('contact');
 
       Array.prototype.forEach.call(form.querySelectorAll('.field'), function (f) {

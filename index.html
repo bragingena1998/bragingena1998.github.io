@@ -857,8 +857,58 @@
   var API = "https://sobez.mindandmotion.ru/zayavka";
   var formbox = document.getElementById('formbox');
 
+  // Вернуть форму в рабочее состояние.
+  //
+  // Без этого форма была одноразовой: после отправки на её месте навсегда
+  // оставался экран «Записал», а кнопка под ним — заблокированной надписью
+  // «Отправляю…». Ошибся в контакте — исправить уже нельзя, только
+  // перезагрузка страницы. Обычный человек так делать не станет, он уйдёт.
+  function resetForm(card) {
+    var live = card.querySelector('.form-live');
+    var done = card.querySelector('.form-done');
+    var form = card.querySelector('.zayavka-form');
+    if (!live || !done || !form) return;
+
+    live.hidden = false;
+    done.hidden = true;
+
+    var button = form.querySelector('.form-send');
+    if (button) {
+      button.disabled = false;
+      button.textContent = 'Отправить';
+    }
+
+    var problem = form.querySelector('.form-error');
+    if (problem) problem.hidden = true;
+
+    Array.prototype.forEach.call(form.querySelectorAll('.field'), function (f) {
+      f.classList.remove('bad');
+    });
+
+    // Шаг с ботом дорисовывается под конкретную заявку — при следующей
+    // отправке номер будет другой, поэтому старый убираем.
+    Array.prototype.forEach.call(done.querySelectorAll('.tg-step, .tg-note'), function (el) {
+      el.parentNode.removeChild(el);
+    });
+    var title = done.querySelector('.modal-title');
+    if (title) title.textContent = 'Записал';
+    var lede = done.querySelector('.modal-lede');
+    if (lede) {
+      lede.textContent = 'Напишу вам тем способом, который вы указали — '
+        + 'обычно в течение дня. Сессии веду лично, поэтому не мгновенно.';
+    }
+
+    // Поля чистим только после успешной отправки: если человек просто
+    // закрыл окно, набранный текст должен остаться.
+    if (card.getAttribute('data-sent') === '1') {
+      form.reset();
+      card.removeAttribute('data-sent');
+    }
+  }
+
   function openForm() {
     closeChoice();
+    each('#formbox .modal-card', function (card) { resetForm(card); });
     formbox.hidden = false;
     document.body.classList.add('locked');
     goal('form_open');
@@ -875,6 +925,16 @@
   });
   each('#formbox [data-close]', function (el) {
     el.addEventListener('click', closeForm);
+  });
+
+  // У формы, стоящей прямо на странице, закрывать нечего — её «Закрыть»
+  // должна возвращать форму в исходное состояние. Раньше эта кнопка не
+  // делала вообще ничего, и блок навсегда застревал на «Записал».
+  each('.onpage-form [data-close]', function (el) {
+    el.addEventListener('click', function () {
+      var card = el.closest ? el.closest('.onpage-form') : null;
+      if (card) resetForm(card);
+    });
   });
   document.addEventListener('keydown', function (e) {
     if (e.key !== 'Escape' && e.key !== 'Esc') return;
@@ -902,18 +962,15 @@
     link.className = 'form-send tg-step';
     link.style.textDecoration = 'none';
     link.style.textAlign = 'center';
-    link.style.marginBottom = '10px';
+    link.style.marginBottom = '14px';
     link.href = 'tg://resolve?domain=' + BOT + '&start=w' + requestId;
     link.textContent = 'Открыть бота';
     link.addEventListener('click', function () { goal('pick_telegram'); });
 
-    var note = document.createElement('p');
-    note.className = 'pick-note';
-    note.textContent = 'Не открылось — значит нужен VPN. Тогда просто ждите: '
-      + 'заявка у меня, напишу другим способом, если оставите его.';
-
-    box.insertBefore(link, box.firstChild);
-    box.insertBefore(note, link.nextSibling);
+    // Порядок важен: сначала объяснение, потом действие. Кнопка, стоящая
+    // выше заголовка, читается как «сначала жми, потом разберёшься».
+    var close = box.querySelector('[data-close]');
+    box.insertBefore(link, close);
   }
 
   each('.zayavka-form', function (form) {
@@ -968,6 +1025,9 @@
         return r.json().catch(function () { return {}; });
       }).then(function (answer) {
         goal('form_sent');
+        // Отмечаем успех: при следующем открытии форма очистит поля,
+        // чтобы человек не отправил ту же заявку второй раз.
+        card.setAttribute('data-sent', '1');
         // Если человек выбрал Telegram, ответить ему в личку я не могу:
         // бот не пишет первым, пока сам человек не нажал «Начать».
         // Поэтому здесь не «спасибо», а последний нужный шаг — с номером
@@ -981,7 +1041,7 @@
         problem.textContent = 'Не отправилось. Попробуйте ещё раз или напишите мне во ВКонтакте.';
         problem.hidden = false;
         button.disabled = false;
-        button.textContent = 'Отправить заявку';
+        button.textContent = 'Отправить';
       });
     });
   });

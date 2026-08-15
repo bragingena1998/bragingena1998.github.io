@@ -60,7 +60,7 @@
           "name": "Сколько это занимает времени?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Около двадцати минут перепиской в Telegram. Девять вопросов задаются по одному, следующий не показывается, пока вы не ответили на текущий."
+            "text": "Около двадцати минут перепиской в мессенджере MAX или Telegram. Девять вопросов задаются по одному, следующий не показывается, пока вы не ответили на текущий."
           }
         },
         {
@@ -261,44 +261,18 @@
     outline: 2px solid var(--ink); outline-offset: 2px;
   }
 
-  /* --- Форма заявки: путь без мессенджеров ---------------------------- */
-  .field { margin-bottom: 16px; }
-  .field label {
-    display: block; font-size: 13.5px; font-weight: 600;
-    margin-bottom: 6px; color: var(--ink);
-  }
-  .field .hint { font-weight: 400; color: var(--muted); }
-  .field textarea, .field input, .field select {
-    width: 100%; font: inherit; font-size: 15px;
-    color: var(--ink); background: var(--paper);
-    border: 1px solid var(--line); border-radius: 6px;
-    padding: 10px 12px;
-  }
-  .field textarea { min-height: 76px; resize: vertical; }
-  .field textarea:focus, .field input:focus, .field select:focus {
-    outline: 2px solid var(--accent); outline-offset: 0; border-color: var(--accent);
-  }
-  .field.bad textarea, .field.bad input { border-color: #C0392B; }
-  .contact-row { display: grid; grid-template-columns: 40% 1fr; gap: 8px; }
-  .trap { position: absolute; left: -9999px; width: 1px; height: 1px; }
+  /* --- Кнопки выбора мессенджера -------------------------------------- */
+  /* Имя .form-send осталось от формы заявки, которую убрали 15.08.2026:
+     переименовывать пришлось бы в четырёх местах ради косметики. */
   .form-send {
     display: block; width: 100%; font: inherit; font-size: 16px; font-weight: 600;
     cursor: pointer; background: var(--accent); color: var(--on-accent);
     border: 0; border-radius: 4px; padding: 14px 20px; margin-top: 4px;
   }
   .form-send:hover { filter: brightness(1.07); }
-  .form-send[disabled] { opacity: 0.6; cursor: default; }
-  .form-note { font-size: 13px; color: var(--muted); margin: 12px 0 0; text-align: left; }
-  .form-note a { color: var(--muted); }
-  .form-error { color: #C0392B; font-size: 14px; margin: 10px 0 0; }
-  .form-done { text-align: left; }
-  .form-done h2 { margin-bottom: 10px; }
-  .onpage-form {
-    background: var(--raised); border: 1px solid var(--line);
-    border-radius: 10px; padding: 24px 22px; margin-top: 22px;
-    box-shadow: var(--shadow);
-  }
-  .onpage-form .modal-title, .onpage-form .modal-lede { display: none; }
+  /* Кнопка-ссылка: выглядит как кнопка, но это <a> — открывает приложение
+     обычным переходом, без участия скрипта. */
+  .pick-link { text-align: center; text-decoration: none; }
 
   .pick { margin-bottom: 22px; }
   .pick-alt { margin-bottom: 0; }
@@ -310,12 +284,6 @@
   .pick-note {
     font-size: 13.5px; color: var(--muted); margin: 9px 0 0;
     text-align: left; hyphens: manual;
-  }
-
-  .alt-form {
-    display: inline-block; margin-top: 14px; font-size: 14px;
-    background: none; border: 0; padding: 0; cursor: pointer;
-    color: var(--accent); text-decoration: underline; font-family: inherit;
   }
   body.locked { overflow: hidden; }
   @media (max-width: 420px) {
@@ -493,7 +461,7 @@
     <div class="cta-box">
       <a class="cta" href="https://t.me/trainerinterview_bot?start=site" data-source="site">Начать репетицию — бесплатно</a>
       <p class="cta-note">Около 20 минут перепиской. Резюме не обязательно — хватит ссылки на вакансию.</p>
-      <p class="cta-note">Telegram в России ограничивают — нужен VPN или прокси.</p>
+      <p class="cta-note">Бот работает в MAX и в Telegram — выберете на следующем шаге.</p>
     </div>
 
     <div class="demo">
@@ -563,7 +531,7 @@
       </details>
       <details>
         <summary>Сколько это занимает времени?</summary>
-        <p class="faq-a">Около двадцати минут перепиской в Telegram. Вопросы задаются по одному: следующий не появится, пока вы не ответили на текущий — как на настоящем собеседовании.</p>
+        <p class="faq-a">Около двадцати минут перепиской — в MAX или в Telegram, как вам удобнее. Вопросы задаются по одному: следующий не появится, пока вы не ответили на текущий — как на настоящем собеседовании.</p>
       </details>
       <details>
         <summary>Это правда бесплатно?</summary>
@@ -571,7 +539,7 @@
       </details>
       <details>
         <summary>У меня не открывается Telegram. Как быть?</summary>
-        <p class="faq-a">Telegram в России ограничивают, поэтому ссылка может не сработать — включите VPN или прокси и нажмите кнопку ещё раз. Если Telegram открывается, но кнопка всё равно ничего не делает, найдите бота вручную по имени <span class="botname mono">@trainerinterview_bot</span>. Совсем не пользуетесь Telegram<span class="vk-box"> — напишите мне <a data-vk href="#">во ВКонтакте</a>, сессию проведём там</span>.</p>
+        <p class="faq-a">Тогда идите через MAX — там VPN не нужен, а бот и разбор те же самые. На большинстве телефонов, купленных в России, MAX уже установлен. Если всё же хотите Telegram: включите VPN или прокси и нажмите кнопку ещё раз, а если приложение открывается, но кнопка ничего не делает — найдите бота вручную по имени <span class="botname mono">@trainerinterview_bot</span>.</p>
       </details>
       <details>
         <summary>Подойдёт ли это моей профессии?</summary>
@@ -581,62 +549,16 @@
   </section>
 
 
-  <section class="block">
-    <h2>Оставить заявку прямо здесь</h2>
-    <p>Если Telegram у вас не открывается или вы им не пользуетесь — заполните поля ниже. Отвечу тем способом, который укажете.</p>
-    <div class="onpage-form">
-    <div class="form-live">
-      <h2 class="modal-title" id="form-title">Оставьте, куда вам написать</h2>
-      <p class="modal-lede">Два поля — и всё. Резюме, время и остальное обсудим в переписке.</p>
-
-      <form class="zayavka-form" novalidate>
-        <div class="field" data-field="vacancy">
-          <label>На какую вакансию целитесь</label>
-          <textarea name="vacancy" rows="2" placeholder="Вставьте ссылку на вакансию — или просто напишите должность и город"></textarea>
-        </div>
-
-        <div class="field" data-field="contact">
-          <label>Куда вам ответить</label>
-          <div class="contact-row">
-            <select name="contact_kind">
-              <option value="max">MAX</option>
-              <option value="telegram">Telegram</option>
-              <option value="vk">ВКонтакте</option>
-              <option value="email">Почта</option>
-              <option value="phone">Телефон</option>
-            </select>
-            <input name="contact" placeholder="номер, @имя, ссылка или почта">
-          </div>
-        </div>
-
-        <input type="hidden" name="resume" value="">
-        <input class="trap" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
-
-        <button type="submit" class="form-send">Отправить</button>
-        <p class="form-error" hidden></p>
-        <p class="form-note">Бесплатно. Отвечу в течение дня. Всё, что вы напишете, лежит на моём собственном сервере и никому не передаётся.<br>Нажимая «Отправить», вы соглашаетесь с <a href="/terms.html" target="_blank" rel="noopener">условиями</a> и <a href="/privacy.html" target="_blank" rel="noopener">обработкой данных</a>.</p>
-      </form>
-    </div>
-
-    <div class="form-done" hidden>
-      <h2 class="modal-title">Записал</h2>
-      <p class="modal-lede">Напишу вам тем способом, который вы указали — обычно в течение дня. Сессии веду лично, поэтому не мгновенно.</p>
-      <button type="button" class="form-send" data-close>Закрыть</button>
-    </div>
-  </div>
-    </div>
-  </section>
-
   <div class="final">
     <h2>Попробуем?</h2>
     <p>Сессия бесплатная. Взамен прошу только честный отзыв — что оказалось полезным, а что пустым.</p>
     <div class="cta-box">
       <a class="cta" href="https://t.me/trainerinterview_bot?start=site" data-source="site">Начать репетицию — бесплатно</a>
-      <p class="cta-note">Telegram в России ограничивают — нужен VPN или прокси.</p>
+      <p class="cta-note">Бот работает в MAX и в Telegram — выберете на следующем шаге.</p>
     </div>
   </div>
 
-  <footer class="mono">Тренажёр собеседований · <a href="https://t.me/trainerinterview_bot?start=footer">@trainerinterview_bot</a><span class="vk-box"> · <a data-vk href="#">ВКонтакте</a></span><br><a href="/terms.html">Пользовательское соглашение</a> · <a href="/privacy.html">Политика конфиденциальности</a></footer>
+  <footer class="mono">Тренажёр собеседований · <a href="https://max.ru/se13968032_bot?start=footer">бот в MAX</a> · <a href="https://t.me/trainerinterview_bot?start=footer">Telegram</a><span class="vk-box"> · <a data-vk href="#">ВКонтакте</a></span><br><a href="/terms.html">Пользовательское соглашение</a> · <a href="/privacy.html">Политика конфиденциальности</a></footer>
 </div>
 
 <!-- Окно с развилкой.
@@ -649,10 +571,20 @@
      Обе строки — кнопки, а не пояснения: игнорировать нечего.
 
      ⚠️ Заголовок был «Telegram в России ограничен» — и восемь из четырнадцати
-     закрывали окно, ничего не выбрав. Оно читалось как «сервис не работает»,
-     хотя второй путь работает всегда. Поэтому заголовок теперь про выбор,
-     а про VPN написано мелким под той кнопкой, которой это касается.
-     Факт никуда не делся — он просто перестал быть первым, что видит человек.
+     закрывали окно, ничего не выбрав. Оно читалось как «сервис не работает».
+     Поэтому заголовок про выбор, а про VPN написано мелким под той кнопкой,
+     которой это касается.
+
+     ⚠️ Второй путь был не мессенджером, а формой заявки: человек оставлял
+     контакт, и дальше владелец писал ему руками. Форма убрана 15.08.2026,
+     когда бот заработал в MAX. Причина проста: форма обещала ответ «в течение
+     дня», а бот отвечает сразу. Держать медленный путь рядом с быстрым, когда
+     оба ведут к одному, — это выбор между «сейчас» и «когда-нибудь».
+     MAX не блокируется, VPN не нужен, он предустановлен на телефонах,
+     продаваемых в России, — то есть закрывает ровно тех шестерых из десяти,
+     у кого не открывался Telegram.
+
+     MAX стоит первым намеренно: он работает у всех, а Telegram — не у всех.
 
      Вторая ступень показывается после запуска Telegram и не закрывается.
      Вернувшийся из неоткрывшегося приложения попадает на тот же экран, а не
@@ -666,16 +598,16 @@
 
     <div id="choice-start">
       <h2 class="modal-title" id="choice-title">Как начать</h2>
-      <p class="modal-lede">Два пути, результат одинаковый. Выбирайте, какой удобнее.</p>
+      <p class="modal-lede">Бот один, мессенджера два. Выбирайте, какой у вас есть.</p>
 
       <div class="pick">
-        <button type="button" class="form-send" data-pick-tg>Открыть бота в Telegram</button>
-        <p class="pick-note">Нужен VPN или прокси — Telegram в России ограничен. Это ограничение связи, а не нашего сервиса.</p>
+        <a class="form-send pick-link" data-pick-max href="#">Открыть бота в MAX</a>
+        <p class="pick-note">Работает без VPN. На большинстве телефонов, купленных в России, MAX уже стоит.</p>
       </div>
 
       <div class="pick pick-alt">
-        <button type="button" class="form-send pick-second" data-open-form>Оставить заявку здесь</button>
-        <p class="pick-note">Без Telegram и без VPN. Отвечу туда, куда скажете: ВКонтакте, почта или телефон.</p>
+        <button type="button" class="form-send pick-second" data-pick-tg>Открыть бота в Telegram</button>
+        <p class="pick-note">Нужен VPN или прокси — Telegram в России ограничен. Это ограничение связи, а не нашего сервиса.</p>
       </div>
     </div>
 
@@ -686,59 +618,9 @@
       <p class="modal-copyline"><span class="botname mono">@trainerinterview_bot</span> <button type="button" class="copy">скопировать</button></p>
 
       <div class="pick pick-alt" style="margin-top: 24px">
-        <button type="button" class="form-send pick-second" data-open-form>Оставить заявку на сайте</button>
-        <p class="pick-note">Если с Telegram не вышло — этот путь работает всегда.</p>
+        <a class="form-send pick-link" data-pick-max href="#">Открыть бота в MAX</a>
+        <p class="pick-note">Если с Telegram не вышло — здесь VPN не нужен, тот же бот и тот же разбор.</p>
       </div>
-    </div>
-  </div>
-</div>
-
-<!-- Форма заявки. Путь для тех, у кого Telegram не открывается или кому он
-     не нужен: человек не переходит никуда, а заполняет три поля там же, где
-     стоит. Отправляется на собственный сервер владельца — сторонние формы
-     отвергнуты, потому что через них чужие резюме уходили бы третьей стороне. -->
-<div class="modal" id="formbox" hidden role="dialog" aria-modal="true" aria-labelledby="form-title">
-  <div class="modal-back" data-close></div>
-  <div class="modal-card">
-    <button type="button" class="modal-x" data-close aria-label="Закрыть">×</button>
-
-    <div class="form-live">
-      <h2 class="modal-title">Оставьте, куда вам написать</h2>
-      <p class="modal-lede">Два поля — и всё. Резюме, время и остальное обсудим в переписке.</p>
-
-      <form class="zayavka-form" novalidate>
-        <div class="field" data-field="vacancy">
-          <label>На какую вакансию целитесь</label>
-          <textarea name="vacancy" rows="2" placeholder="Вставьте ссылку на вакансию — или просто напишите должность и город"></textarea>
-        </div>
-
-        <div class="field" data-field="contact">
-          <label>Куда вам ответить</label>
-          <div class="contact-row">
-            <select name="contact_kind">
-              <option value="max">MAX</option>
-              <option value="telegram">Telegram</option>
-              <option value="vk">ВКонтакте</option>
-              <option value="email">Почта</option>
-              <option value="phone">Телефон</option>
-            </select>
-            <input name="contact" placeholder="номер, @имя, ссылка или почта">
-          </div>
-        </div>
-
-        <input type="hidden" name="resume" value="">
-        <input class="trap" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
-
-        <button type="submit" class="form-send">Отправить</button>
-        <p class="form-error" hidden></p>
-        <p class="form-note">Бесплатно. Отвечу в течение дня. Всё, что вы напишете, лежит на моём собственном сервере и никому не передаётся.<br>Нажимая «Отправить», вы соглашаетесь с <a href="/terms.html" target="_blank" rel="noopener">условиями</a> и <a href="/privacy.html" target="_blank" rel="noopener">обработкой данных</a>.</p>
-      </form>
-    </div>
-
-    <div class="form-done" hidden>
-      <h2 class="modal-title">Записал</h2>
-      <p class="modal-lede">Напишу вам тем способом, который вы указали — обычно в течение дня. Сессии веду лично, поэтому не мгновенно.</p>
-      <button type="button" class="form-send" data-close>Закрыть</button>
     </div>
   </div>
 </div>
@@ -778,6 +660,7 @@
 <script>
 (function () {
   var BOT = "trainerinterview_bot";
+  var MAXBOT = "se13968032_bot";
   var VK  = "https://vk.me/id84761260";
 
   var each = function (sel, fn) {
@@ -836,7 +719,7 @@
 
   var lastSource = 'site';
 
-  // --- Главная кнопка: открывает окно, а не Telegram ---
+  // --- Главная кнопка: открывает окно, а не мессенджер ---
   each('.cta', function (btn) {
     btn.addEventListener('click', function (e) {
       e.preventDefault();
@@ -853,196 +736,18 @@
     });
   });
 
-  // --- Форма заявки: одна и та же в окне и блоком на странице ---
-  var API = "https://sobez.mindandmotion.ru/zayavka";
-  var formbox = document.getElementById('formbox');
-
-  // Вернуть форму в рабочее состояние.
+  // --- MAX ---
   //
-  // Без этого форма была одноразовой: после отправки на её месте навсегда
-  // оставался экран «Записал», а кнопка под ним — заблокированной надписью
-  // «Отправляю…». Ошибся в контакте — исправить уже нельзя, только
-  // перезагрузка страницы. Обычный человек так делать не станет, он уйдёт.
-  function resetForm(card) {
-    var live = card.querySelector('.form-live');
-    var done = card.querySelector('.form-done');
-    var form = card.querySelector('.zayavka-form');
-    if (!live || !done || !form) return;
-
-    live.hidden = false;
-    done.hidden = true;
-
-    var button = form.querySelector('.form-send');
-    if (button) {
-      button.disabled = false;
-      button.textContent = 'Отправить';
-    }
-
-    var problem = form.querySelector('.form-error');
-    if (problem) problem.hidden = true;
-
-    Array.prototype.forEach.call(form.querySelectorAll('.field'), function (f) {
-      f.classList.remove('bad');
-    });
-
-    // Шаг с ботом дорисовывается под конкретную заявку — при следующей
-    // отправке номер будет другой, поэтому старый убираем.
-    Array.prototype.forEach.call(done.querySelectorAll('.tg-step, .tg-note'), function (el) {
-      el.parentNode.removeChild(el);
-    });
-    var title = done.querySelector('.modal-title');
-    if (title) title.textContent = 'Записал';
-    var lede = done.querySelector('.modal-lede');
-    if (lede) {
-      lede.textContent = 'Напишу вам тем способом, который вы указали — '
-        + 'обычно в течение дня. Сессии веду лично, поэтому не мгновенно.';
-    }
-
-    // Поля чистим только после успешной отправки: если человек просто
-    // закрыл окно, набранный текст должен остаться.
-    if (card.getAttribute('data-sent') === '1') {
-      form.reset();
-      card.removeAttribute('data-sent');
-    }
-  }
-
-  function openForm() {
-    closeChoice();
-    each('#formbox .modal-card', function (card) { resetForm(card); });
-    formbox.hidden = false;
-    document.body.classList.add('locked');
-    goal('form_open');
-    var first = formbox.querySelector('[name="vacancy"]');
-    if (first) first.focus();
-  }
-  function closeForm() {
-    formbox.hidden = true;
-    document.body.classList.remove('locked');
-  }
-
-  each('[data-open-form]', function (btn) {
-    btn.addEventListener('click', openForm);
-  });
-  each('#formbox [data-close]', function (el) {
-    el.addEventListener('click', closeForm);
-  });
-
-  // У формы, стоящей прямо на странице, закрывать нечего — её «Закрыть»
-  // должна возвращать форму в исходное состояние. Раньше эта кнопка не
-  // делала вообще ничего, и блок навсегда застревал на «Записал».
-  each('.onpage-form [data-close]', function (el) {
-    el.addEventListener('click', function () {
-      var card = el.closest ? el.closest('.onpage-form') : null;
-      if (card) resetForm(card);
-    });
-  });
-  document.addEventListener('keydown', function (e) {
-    if (e.key !== 'Escape' && e.key !== 'Esc') return;
-    if (!formbox.hidden) closeForm();
-    else if (!choice.hidden) closeChoice();
-  });
-
-  // Экран «Записал» для тех, кто выбрал Telegram. Бот не может написать
-  // первым — это ограничение Telegram, а не настройка. Пока человек сам
-  // не откроет бота, указанный им username бесполезен, и заявка зависает.
-  function showBotStep(card, requestId) {
-    var box = card.querySelector('.form-done');
-    if (!box || box.querySelector('.tg-step')) return;
-
-    var title = box.querySelector('.modal-title');
-    if (title) title.textContent = 'Записал. Остался один шаг';
-
-    var lede = box.querySelector('.modal-lede');
-    if (lede) {
-      lede.textContent = 'Вы выбрали Telegram — откройте бота, и я отвечу прямо там. '
-        + 'Сам написать вам первым он не может: так устроен Telegram.';
-    }
-
-    var link = document.createElement('a');
-    link.className = 'form-send tg-step';
-    link.style.textDecoration = 'none';
-    link.style.textAlign = 'center';
-    link.style.marginBottom = '14px';
-    link.href = 'tg://resolve?domain=' + BOT + '&start=w' + requestId;
-    link.textContent = 'Открыть бота';
-    link.addEventListener('click', function () { goal('pick_telegram'); });
-
-    // Порядок важен: сначала объяснение, потом действие. Кнопка, стоящая
-    // выше заголовка, читается как «сначала жми, потом разберёшься».
-    var close = box.querySelector('[data-close]');
-    box.insertBefore(link, close);
-  }
-
-  each('.zayavka-form', function (form) {
-    var card = form.closest('.modal-card') || form.closest('.onpage-form');
-    var live = card.querySelector('.form-live');
-    var done = card.querySelector('.form-done');
-    var problem = form.querySelector('.form-error');
-    var button = form.querySelector('.form-send');
-
-    form.addEventListener('submit', function (e) {
-      e.preventDefault();
-
-      var payload = {
-        vacancy: form.vacancy.value.trim(),
-        resume: form.resume.value.trim(),
-        contact_kind: form.contact_kind.value,
-        contact: form.contact.value.trim(),
-        website: form.website.value,
-        source: 'site'
-      };
-
-      // Резюме не проверяем: оно необязательное. Это самое трудное поле,
-      // человек на телефоне, и достать его негде — доспросим в переписке.
-      var bad = [];
-      if (payload.vacancy.length < 12) bad.push('vacancy');
-      if (payload.contact.length < 3) bad.push('contact');
-
-      Array.prototype.forEach.call(form.querySelectorAll('.field'), function (f) {
-        f.classList.remove('bad');
-      });
-
-      if (bad.length) {
-        bad.forEach(function (name) {
-          var f = form.querySelector('[data-field="' + name + '"]');
-          if (f) f.classList.add('bad');
-        });
-        problem.textContent = 'Заполните выделенные поля — ссылка тоже подойдёт.';
-        problem.hidden = false;
-        return;
-      }
-
-      problem.hidden = true;
-      button.disabled = true;
-      button.textContent = 'Отправляю…';
-
-      fetch(API, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload)
-      }).then(function (r) {
-        if (!r.ok) throw new Error('bad');
-        return r.json().catch(function () { return {}; });
-      }).then(function (answer) {
-        goal('form_sent');
-        // Отмечаем успех: при следующем открытии форма очистит поля,
-        // чтобы человек не отправил ту же заявку второй раз.
-        card.setAttribute('data-sent', '1');
-        // Если человек выбрал Telegram, ответить ему в личку я не могу:
-        // бот не пишет первым, пока сам человек не нажал «Начать».
-        // Поэтому здесь не «спасибо», а последний нужный шаг — с номером
-        // заявки в ссылке, чтобы разговор связался с уже отправленным.
-        if (payload.contact_kind === 'telegram' && answer && answer.id) {
-          showBotStep(card, answer.id);
-        }
-        live.hidden = true;
-        done.hidden = false;
-      }).catch(function () {
-        problem.textContent = 'Не отправилось. Попробуйте ещё раз или напишите мне во ВКонтакте.';
-        problem.hidden = false;
-        button.disabled = false;
-        button.textContent = 'Отправить';
-      });
+  // Обычная ссылка, а не скрипт: max.ru не блокируется, поэтому переход
+  // работает сам. Метка перехода (?start=site) устроена как в Telegram —
+  // это подтвердилось документацией MAX, переделывать ничего не пришлось.
+  //
+  // Адрес проставляется здесь, а не в разметке, чтобы метка бралась от той
+  // кнопки, которую человек нажал: их на странице две — вверху и внизу.
+  each('[data-pick-max]', function (link) {
+    link.addEventListener('click', function () {
+      link.href = 'https://max.ru/' + MAXBOT + '?start=' + lastSource;
+      goal('pick_max');
     });
   });
 

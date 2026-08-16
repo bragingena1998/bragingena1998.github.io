@@ -274,6 +274,22 @@
      обычным переходом, без участия скрипта. */
   .pick-link { text-align: center; text-decoration: none; }
 
+  /* --- Цены ----------------------------------------------------------- */
+  .prices {
+    background: var(--raised); border: 1px solid var(--line);
+    border-radius: 10px; padding: 6px 20px; margin: 20px 0;
+    box-shadow: var(--shadow);
+  }
+  .price-row {
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 18px; padding: 16px 0; border-bottom: 1px solid var(--line);
+  }
+  .price-row:last-child { border-bottom: 0; }
+  .price-sum {
+    font-size: 21px; font-weight: 600; white-space: nowrap; color: var(--accent);
+  }
+  .price-note { font-size: 13.5px; color: var(--muted); text-align: left; hyphens: manual; }
+
   .pick { margin-bottom: 22px; }
   .pick-alt { margin-bottom: 0; }
   .pick-second {
@@ -549,6 +565,37 @@
   </section>
 
 
+  <!-- Цены.
+       Нужны на странице по двум причинам сразу: человек имеет право знать,
+       сколько это будет стоить, а платёжный сервис при подключении требует
+       видеть на сайте реальные услуги с ценами.
+
+       Формулировка честная: прогоны сейчас бесплатны, и это сказано первой
+       строкой. Прятать будущую цену за «уточняйте» — тот самый случай,
+       когда продукт противоречит сам себе. -->
+  <section class="block" id="prices">
+    <h2>Сколько это будет стоить</h2>
+    <p><strong>Сейчас бесплатно.</strong> Идут первые прогоны: я собираю отзывы и правлю тренажёр по ним. Взамен прошу только честно сказать, что оказалось полезным, а что пустым.</p>
+    <p>Когда бесплатный период кончится, цены будут такими:</p>
+
+    <div class="prices">
+      <div class="price-row">
+        <div><b>Одно собеседование</b><br><span class="price-note">девять вопросов, разбор каждого ответа и итоговый разбор файлом</span></div>
+        <div class="price-sum">290 ₽</div>
+      </div>
+      <div class="price-row">
+        <div><b>Два собеседования</b><br><span class="price-note">по той же вакансии или по разным — как захотите</span></div>
+        <div class="price-sum">390 ₽</div>
+      </div>
+      <div class="price-row">
+        <div><b>Неделя без ограничений</b><br><span class="price-note">сколько угодно собеседований за 7 дней</span></div>
+        <div class="price-sum">790 ₽</div>
+      </div>
+    </div>
+
+    <p class="price-note">Оплата картой прямо в боте, доступ открывается сразу. Условия — в <a href="/offer.html">публичной оферте</a>.</p>
+  </section>
+
   <div class="final">
     <h2>Попробуем?</h2>
     <p>Сессия бесплатная. Взамен прошу только честный отзыв — что оказалось полезным, а что пустым.</p>
@@ -558,7 +605,7 @@
     </div>
   </div>
 
-  <footer class="mono">Тренажёр собеседований · <a href="https://max.ru/se13968032_bot?start=footer">бот в MAX</a> · <a href="https://t.me/trainerinterview_bot?start=footer">Telegram</a><span class="vk-box"> · <a data-vk href="#">ВКонтакте</a></span><br><a href="/terms.html">Пользовательское соглашение</a> · <a href="/privacy.html">Политика конфиденциальности</a></footer>
+  <footer class="mono">Тренажёр собеседований · <a href="https://max.ru/se13968032_bot?start=footer">бот в MAX</a> · <a href="https://t.me/trainerinterview_bot?start=footer">Telegram</a><span class="vk-box"> · <a data-vk href="#">ВКонтакте</a></span><br><a href="/offer.html">Оферта</a> · <a href="/terms.html">Пользовательское соглашение</a> · <a href="/privacy.html">Политика конфиденциальности</a><br>Брагин Геннадий Александрович, самозанятый · <a href="mailto:bragin.gena1998@gmail.com">bragin.gena1998@gmail.com</a></footer>
 </div>
 
 <!-- Окно с развилкой.

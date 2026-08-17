@@ -631,7 +631,7 @@
     </div>
   </div>
 
-  <footer class="mono">Тренажёр собеседований · <a href="https://max.ru/se13968032_bot?start=footer">бот в MAX</a> · <a href="https://t.me/trainerinterview_bot?start=footer">Telegram</a><span class="vk-box"> · <a data-vk href="#">ВКонтакте</a></span><br><a href="/offer.html">Оферта</a> · <a href="/terms.html">Пользовательское соглашение</a> · <a href="/privacy.html">Политика конфиденциальности</a><br>Брагин Геннадий Александрович, самозанятый · ИНН 661709876651 · <a href="mailto:bragin.gena1998@gmail.com">bragin.gena1998@gmail.com</a></footer>
+  <footer class="mono">Тренажёр собеседований · <a href="https://max.ru/se13968032_bot?start=footer" target="_blank" rel="noopener">бот в MAX</a> · <a href="https://t.me/trainerinterview_bot?start=footer" target="_blank" rel="noopener">Telegram</a><span class="vk-box"> · <a data-vk href="#">ВКонтакте</a></span><br><a href="/offer.html">Оферта</a> · <a href="/terms.html">Пользовательское соглашение</a> · <a href="/privacy.html">Политика конфиденциальности</a><br>Брагин Геннадий Александрович, самозанятый · ИНН 661709876651 · <a href="mailto:bragin.gena1998@gmail.com">bragin.gena1998@gmail.com</a></footer>
 </div>
 
 <!-- Окно с развилкой.
@@ -674,7 +674,7 @@
       <p class="modal-lede">Бот один, мессенджера два. Выбирайте, какой у вас есть.</p>
 
       <div class="pick">
-        <a class="form-send pick-link" data-pick-max href="#">Открыть бота в MAX</a>
+        <a class="form-send pick-link" data-pick-max href="#" target="_blank" rel="noopener">Открыть бота в MAX</a>
         <p class="pick-note">Работает без VPN. На большинстве телефонов, купленных в России, MAX уже стоит.</p>
       </div>
 
@@ -691,7 +691,7 @@
       <p class="modal-copyline"><span class="botname mono">@trainerinterview_bot</span> <button type="button" class="copy">скопировать</button></p>
 
       <div class="pick pick-alt" style="margin-top: 24px">
-        <a class="form-send pick-link" data-pick-max href="#">Открыть бота в MAX</a>
+        <a class="form-send pick-link" data-pick-max href="#" target="_blank" rel="noopener">Открыть бота в MAX</a>
         <p class="pick-note">Если с Telegram не вышло — здесь VPN не нужен, тот же бот и тот же разбор.</p>
       </div>
     </div>
@@ -784,6 +784,14 @@
   // в фон — показывали подсказку. Проверка врала в обе стороны: Telegram
   // запускается и без связи, просто висит пустым. Угадывание убрано —
   // вторая ступень окна показывается сразу и остаётся ждать человека.
+  //
+  // ⚠️ Схему tg:// не менять на https://t.me — причина выше, у разметки:
+  // адрес t.me в России блокируют, браузер виснет, человек уходит.
+  //
+  // И это НЕ переадресация: tg:// обрабатывает операционная система,
+  // документ остаётся открытым. 17.08 я едва не переписал это на обычную
+  // ссылку из-за замечания ЮKassa «по клику идёт переадресация» — а уводила
+  // со страницы кнопка MAX, обычная ссылка без target. Её и поправили.
   function tryOpen(source) {
     window.location.href = 'tg://resolve?domain=' + BOT + '&start=' + source;
     stepStart.hidden = true;

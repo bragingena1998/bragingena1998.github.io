@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Оплата — Тренажёр собеседований</title>
+<meta name="description" content="Страница возврата после оплаты: вернитесь в чат бота, доступ откроется там.">
+<meta name="robots" content="noindex, nofollow">
+<link rel="canonical" href="https://sobez.mindandmotion.ru/oplacheno.html">
+
+<style>
+  :root {
+    --paper: #E3E6DF; --raised: #F4F6F0; --ink: #1A1E21; --muted: #55605A;
+    --line: #CBD3C9; --accent: #96540A; --accent-soft: rgba(150, 84, 10, 0.11);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --paper: #0E1114; --raised: #191D21; --ink: #E8EBE7; --muted: #99A39D;
+      --line: #272D31; --accent: #E0A03C; --accent-soft: rgba(224, 160, 60, 0.12);
+    }
+  }
+
+  * { box-sizing: border-box; }
+  html { text-size-adjust: 100%; }
+  body {
+    margin: 0; background: var(--paper); color: var(--ink);
+    font: 16px/1.62 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: 620px; margin: 0 auto; padding: 60px 20px 80px; }
+
+  a { color: var(--accent); }
+
+  h1 { font-size: 26px; line-height: 1.25; margin: 0 0 18px; }
+  p { margin: 0 0 16px; }
+
+  .card {
+    background: var(--raised); border: 1px solid var(--line);
+    border-radius: 14px; padding: 22px 22px 6px; margin: 26px 0;
+  }
+  .muted { color: var(--muted); font-size: 14px; }
+  .mono {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    background: var(--accent-soft); border-radius: 6px; padding: 1px 6px;
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <h1>Спасибо! Возвращайтесь в чат</h1>
+
+  <p>Оплата ушла в обработку. Доступ открывается там же, где вы начинали, —
+  в чате с ботом.</p>
+
+  <div class="card">
+    <p><b>Что сделать:</b></p>
+    <p>Вернитесь в тот чат, из которого пришли, и нажмите кнопку
+    <b>«Я оплатил»</b> под сообщением с ценой. Бот проверит платёж
+    и откроет доступ.</p>
+    <p class="muted">Если кнопка потерялась, отправьте боту команду
+    <span class="mono">/tarify</span> — он найдёт вашу оплату.</p>
+  </div>
+
+  <p class="muted">Деньги списались, а доступ не открылся? Напишите — разберусь
+  и открою вручную: <a href="mailto:bragin.gena1998@gmail.com">bragin.gena1998@gmail.com</a></p>
+
+  <p class="muted"><a href="/">На главную</a></p>
+
+</div>
+</body>
+</html>

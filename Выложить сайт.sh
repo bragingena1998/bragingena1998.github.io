@@ -15,7 +15,7 @@ SERVER="root@85.198.96.149"
 REMOTE="/var/www/sobez-site"
 MAIN="https://sobez.mindandmotion.ru"
 MIRROR="https://bragingena1998.github.io"
-PAGES="index.html offer.html terms.html privacy.html"
+PAGES="index.html offer.html terms.html privacy.html oplacheno.html"
 
 MESSAGE="${1:-Обновление сайта}"
 
